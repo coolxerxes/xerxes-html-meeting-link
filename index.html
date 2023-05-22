@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Document</title>
+
+  <!----------------------------------HEAD---------------------------------------------->
+
+  <head>
+    <div class="hero">
+      <div class="container">
+        <style>
+          * {
+            padding: 0;
+            margin: 0;
+            box-sizing: corder-box;
+          }
+
+          body {
+            width: 100%;
+            margin: 0 auto;
+          }
+
+          .nav-container {
+            background-color: rgb(0, 0, 0);
+            border-bottom: 3px solid rgb(0, 34, 129);
+            display: flex;
+            justify-content: space-between;
+          }
+
+          .right-side,
+          left-side {
+            list-style-type: none;
+          }
+
+          .right-side li,
+          .leftside li {
+            display: inline-block;
+          }
+
+          .right-side li a,
+          .left-side li a {
+            text-decoration: none;
+            display: block;
+            width: 100%;
+            font-size: 15px;
+            color: blue;
+            padding: 14px 16px;
+            font-weight: bold;
+          }
+
+          .left-side li a {
+            height: 100%;
+            width: -5%;
+            font-size: 10px;
+          }
+
+
+          .family {
+            background-color: rgb(0, 33, 150);
+            border-color: #000000;
+            border-width: 6px;
+            border-radius: 6px;
+            color: rgb(255, 255, 255);
+            width: 120px;
+            cursor: pointer;
+            font-size: 15px;
+            font: bold;
+          }
+
+          .h {
+            background-color: rgb(0, 33, 150);
+            border-color: #000000;
+            border-width: 6px;
+            border-radius: 6px;
+            color: rgb(255, 255, 255);
+            width: 25px;
+            cursor: pointer;
+            font-size: 15px;
+            font: bold;
+          }
+        </style>
+
+
+        <nav class="nav-container">
+
+          <ul class="left-side">
+            <li><a href="">Meetinglink.site</a></li>
+          </ul>
+          <li><a class="logout" href="catagorypost.html"><button class="h">C</button></a></li>
+          <li><a class="logout" href="family.html"><button class="family">Family Fun</button></a></li>
+
+          </ul>
+
+
+          <ul class="right-side"></ul>
+          <li><a class="logout" href="hostpost.html"><button class="h">P</button></a></li>
+          <li><a href="login.html" style="color:darkblue">log out</a></li>
+          </ul>
+
+        </nav>
+
+        </script>
+
+
+
+        <!---------------------------------MAP--------------------------------------------->
+
+
+
+
+        <style>
+          /*container to center the map*/
+          #container {
+            height: 72vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+
+          #map {
+            height: 70vh;
+            width: 85vw;
+          }
+
+          html,
+          body {
+            margin: 0;
+            padding: 0;
+          }
+        </style>
+
+
+
+  <body>
+
+    <div id="container">
+      <div id="map"></div>
+    </div>
+
+    <script>
+
+
+      function initMap() {
+
+        let mapOptions = {
+          center: { lat: 26.60775105325326, lng: -81.94498671487925 },
+          zoom: 10,
+          mapId: 'b4762a932ac83060',
+        }
+
+        let map = new google.maps.Map(document.getElementById('map'), mapOptions);
+      }
+    </script>
+
+    <script
+      src="https:maps.googleapis.com/maps/api/js?key=AIzaSyBJFNO8DbbNEa82seuZX15PUoK2gShqdFs&map_ids=b4762a932ac83060&callback=initMap">
+      </script>
+
+
+
+
+
+    <!-------------------------------PARENT--------------------------------------->
+    <style>
+      .parent {
+        margin-right: px;
+        float: right;
+        width: 130px;
+        height: 50px;
+      }
+    </style>
+    <div class="scroll">
+
+
+
+      <div class="parentlist"><button class='parent' id="parent1">Activities</div></button>
+
+      <div class="parentlist"><button class="parent" id="parent2">Events</div></button>
+
+      <div class="parentlist"><button class="parent" id="parent3">Local Artist</div></button>
+
+      <div class="parentlist"><button class="parent" id="parent4">Family Functions</button></div>
+
+      <div class="parentlist"><button class="parent" id="parent5">Team Functions</button></div>
+
+      <div class="parentlist"><button class="parent" id="parent6">Semi Pro Events</button></div>
+
+      <div class="parentlist"><button class="parent" id="parent7">Unusual Events</button></div>
+
+      <div class="parentlist"><button class="parent" id="parent8">Educational Lessons</button></div>
+
+      <div class="parentlist"><button class="parent" id="parent9">FREE Events</button></div>
+
+      <div class="parentlist"><button class="parent" id="parent10">Event Catering</button></div>
+
+      <div class="parentlist"><button class="parent" id="parent11">Local Post</button></div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-----------------------------CHILD--1--LIST--------------------------------->
+
+    <ul id="child1">
+
+
+
+      <div class="child">
+        <div>
+          <label>
+            <input type="checkbox" name="list">
+            <span>Skate Parks</span>
+          </label>
+        </div>
+
+        <div>
+          <label>
+            <input type="checkbox" name="list">
+            <span>Kava Bars</span>
+          </label>
+        </div>
+
+        <div>
+          <label>
+            <input type="checkbox" name="list">
+            <span>Trails</span>
+          </label>
+        </div>
+        <div>
+          <label>
+            <input type="checkbox" name="">
+            <span>Parks</span>
+          </label>
+        </div>
+
+        <div>
+          <label>
+            <input type="checkbox" name="">
+            <span>Clubs</span>
+          </label>
+        </div>
+
+        <div>
+          <label>
+            <input type="checkbox" name="">
+            <span>Movies</span>
+          </label>
+        </div>
+        <div>
+          <label>
+            <input type="checkbox" name="">
+            <span>Ice Skating</span>
+          </label>
+        </div>
+
+        <div>
+          <label>
+            <input type="checkbox" name="">
+            <span>Boxing Gyms</span>
+          </label>
+        </div>
+
+        <div>
+          <label>
+            <input type="checkbox" name="">
+            <span>Basketball</span>
+          </label>
+        </div>
+        <div>
+          <label>
+            <input type="checkbox" name="">
+            <span>Tennis</span>
+          </label>
+        </div>
+
+        <div>
+          <label>
+            <input type="checkbox" name="">
+            <span>Gyms</span>
+          </label>
+        </div>
+
+        <div>
+          <label>
+            <input type="checkbox" name="">
+            <span>Skate Parks</span>
+          </label>
+        </div>
+        </label>
+      </div>
+    </ul>
+
+
+    <!----------------------------CHILD-LIST2------------------------------------------->
+
+
+    <ul id="child2">
+
+      <div class="child">
+        <div>
+          <label>
+            <input type="checkbox" name="">
+            <span>Yoga</span>
+          </label>
+        </div>
+
+        <div>
+          <label>
+            <input type="checkbox" name="">
+            <span>Art</span>
+          </label>
+        </div>
+
+        <div>
+          <label>
+            <input type="checkbox" name="">
+            <span>Dancing</span>
+          </label>
+        </div>
+        <div>
+          <label>
+            <input type="checkbox" name="">
+            <span>Music</span>
+          </label>
+        </div>
+
+        <div>
+          <label>
+            <input type="checkbox" name="">
+            <span>Educational</span>
+          </label>
+        </div>
+
+        <div>
+          <label>
+            <input type="checkbox" name="">
+            <span>Dating</span>
+          </label>
+        </div>
+        <div>
+          <label>
+            <input type="checkbox" name="">
+            <span>Comedy</span>
+          </label>
+        </div>
+
+        <div>
+          <label>
+            <input type="checkbox" name="">
+            <span>Magic</span>
+          </label>
+        </div>
+
+        <div>
+          <label>
+            <input type="checkbox" name="">
+            <span>Stage Show</span>
+          </label>
+        </div>
+        <div>
+          <label>
+            <input type="checkbox" name="">
+            <span>Unusual Events</span>
+          </label>
+        </div>
+
+        <div>
+          <label>
+            <input type="checkbox" name="">
+            <span>Kid</span>
+          </label>
+        </div>
+
+        <div>
+          <label>
+            <input type="checkbox" name="">
+            <span>Church</span>
+          </label>
+        </div>
+        </label>
+      </div>
+    </ul>
+
+
+
+    <!----------------------------------CHILD3-------------------------------------------->
+
+
+    <ul id="child3">
+
+      <div class="child">
+        <div>
+          <label>
+            <input type="checkbox" name="">
+            <span>Poetry</span>
+          </label>
+        </div>
+
+        <div>
+          <label>
+            <input type="checkbox" name="">
+            <span>Art</span>
+          </label>
+        </div>
+
+        <div>
+          <label>
+            <input type="checkbox" name="">
+            <span>Dancing</span>
+          </label>
+        </div>
+        <div>
+          <label>
+            <input type="checkbox" name="">
+            <span>Music</span>
+          </label>
+        </div>
+
+        <div>
+          <label>
+            <input type="checkbox" name="">
+            <span>Singing</span>
+          </label>
+        </div>
+
+        <div>
+          <label>
+            <input type="checkbox" name="">
+            <span>Shows</span>
+          </label>
+        </div>
+        <div>
+          <label>
+            <input type="checkbox" name="">
+            <span>Comedy</span>
+          </label>
+        </div>
+
+        <div>
+          <label>
+            <input type="checkbox" name="">
+            <span>Magic</span>
+          </label>
+        </div>
+
+        <div>
+          <label>
+            <input type="checkbox" name="">
+            <span>Stage Show</span>
+          </label>
+        </div>
+        <div>
+          <label>
+            <input type="checkbox" name="">
+            <span>Unusual Events</span>
+          </label>
+        </div>
+
+        <div>
+          <label>
+            <input type="checkbox" name="">
+            <span>Kid</span>
+          </label>
+        </div>
+
+        <div>
+          <label>
+            <input type="checkbox" name="">
+            <span>Church</span>
+          </label>
+        </div>
+        </label>
+      </div>
+    </ul>
+
+
+    </ul>
+
+
+
+    <!------------------------------JS----Button----exc.....------------------------------>
+
+    <script>
+
+      const template = `
+      <div>
+          <label>
+            <input type="checkbox" name="list">
+            <span>TITLE</span>
+          </label>
+        </div>
+      `
+
+      var elements = document.getElementsByClassName("parentlist");
+      for (var i = 0; i < elements.length; i++) {
+        elements[i].onclick = function () {
+
+          var el = elements[0];
+          while (el) {
+            if (el.tagName === 'DIV') {
+
+              el.classList.remove('bak');
+            }
+            el = el.nextSibling;
+          }
+
+          this.classList.add('bak');
+        };
+      }
+
+      const parent1 = document.getElementById('parent1');
+
+      const child1 = document.getElementById('child1');
+
+      child1.style.display = "none";
+
+      parent1.addEventListener("click",
+        (event) => {
+
+
+          if (child1.style.display == "none") {
+            child1.style.display = "block";
+
+            child2.style.display = "none";
+            child3.style.display = "none";
+            child4.style.display = "none";
+            child5.style.display = "none";
+            child6.style.display = "none";
+            child7.style.display = "none";
+            child8.style.display = "none";
+            child9.style.display = "none";
+            child10.style.display = "none";
+
+
+          } else {
+            child1.style.display = "none";
+          }
+        })
+
+      const parent2 = document.getElementById('parent2');
+
+
+      const child2 = document.getElementById('child2');
+
+      child2.style.display = "none";
+
+      parent2.addEventListener("click",
+        (event) => {
+
+
+          if (child2.style.display == "none") {
+            child2.style.display = "block";
+
+
+            child1.style.display = "none";
+            child3.style.display = "none";
+            child4.style.display = "none";
+            child5.style.display = "none";
+            child6.style.display = "none";
+            child7.style.display = "none";
+            child8.style.display = "none";
+            child9.style.display = "none";
+            child10.style.display = "none";
+
+          } else {
+            child2.style.display = "none";
+          }
+        })
+
+      const parent3 = document.getElementById('parent3');
+
+
+      const child3 = document.getElementById('child3');
+
+      // child3.style.display = "none";
+
+      parent3.addEventListener("click",
+        (event) => {
+
+
+          if (child3.style.display == "none") {
+            child3.style.display = "block";
+
+            child1.style.display = "none";
+            child2.style.display = "none";
+            child4.style.display = "none";
+            child5.style.display = "none";
+            child6.style.display = "none";
+            child7.style.display = "none";
+            child8.style.display = "none";
+            child9.style.display = "none";
+            child10.style.display = "none";
+
+          } else {
+            child3.style.display = "none";
+          }
+        })
+
+
+      debugger;
+      ['Activities', 'Events', 'Local Artist', 'Family Functions', 'Team Functions', 'Semi Pro Events'].forEach((_item, index) => {
+        debugger;
+        const added = JSON.parse(localStorage.getItem(_item) || '[]');
+
+        var chldd = document.getElementById('child' + (index + 1)).getElementsByClassName('child')[0];
+
+        chldd.innerHTML = chldd.innerHTML + added
+          .map((_res) => {
+            return template.replace('TITLE', _res)
+          })
+          .join('')
+      })
+
+    </script>
+
+
+    <!------------------------------SUMMIT-BUTTON------------------------------------->
+
+
+
+    <button class="summit">summit !!!!</button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </body>
+
+</html>
