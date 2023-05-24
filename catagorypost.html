@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="./assets/styles/styles.css">
   <title>Document</title>
 </head>
 
@@ -85,7 +85,6 @@
 </style>
 
 
-
 </head>
 
 
@@ -136,7 +135,6 @@
   var elements = document.getElementsByClassName("parentlist");
   for (var i = 0; i < elements.length; i++) {
     elements[i].onclick = function () {
-      debugger;
       selectedTab = this.getElementsByTagName('button')[0].innerHTML;
 
       var el = elements[0];
@@ -150,111 +148,6 @@
       this.classList.add('bak');
     };
   }
-
-  const parent1 = document.getElementById('parent1');
-
-
-  const child1 = document.getElementById('child1');
-
-
-  // child1.style.display = "none";
-
-  parent1.addEventListener("click",
-    (event) => {
-
-
-      if (child1.style.display == "none") {
-        child1.style.display = "block";
-
-
-
-        child2.style.display = "none";
-        child3.style.display = "none";
-        child4.style.display = "none";
-        child5.style.display = "none";
-        child6.style.display = "none";
-        child7.style.display = "none";
-        child8.style.display = "none";
-        child9.style.display = "none";
-        child10.style.display = "none";
-
-      } else {
-        child1.style.display = "none";
-      }
-    })
-
-  const parent2 = document.getElementById('parent2');
-
-
-  const child2 = document.getElementById('child2');
-
-  child2.style.display = "none";
-
-  parent2.addEventListener("click",
-    (event) => {
-
-
-      if (child2.style.display == "none") {
-        child2.style.display = "block";
-
-
-        child1.style.display = "none";
-        child3.style.display = "none";
-        child4.style.display = "none";
-        child5.style.display = "none";
-        child6.style.display = "none";
-        child7.style.display = "none";
-        child8.style.display = "none";
-        child9.style.display = "none";
-        child10.style.display = "none";
-
-      } else {
-        child2.style.display = "none";
-      }
-    })
-
-  const parent3 = document.getElementById('parent3');
-
-
-  const child3 = document.getElementById('child3');
-
-  child3.style.display = "none";
-
-  parent3.addEventListener("click",
-    (event) => {
-      if (child3.style.display == "none") {
-        child3.style.display = "block";
-
-        child1.style.display = "none";
-        child2.style.display = "none";
-        child4.style.display = "none";
-        child5.style.display = "none";
-        child6.style.display = "none";
-        child7.style.display = "none";
-        child8.style.display = "none";
-        child9.style.display = "none";
-        child10.style.display = "none";
-
-      } else {
-        child3.style.display = "none";
-      }
-    })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </script>
 
 <body>
@@ -341,10 +234,6 @@
   </style>
 
 
-
-
-
-
   <style type="text/css">
     label {
 
@@ -386,9 +275,8 @@
 
   <script>
     function onSaveClicked() {
-      debugger;
       var res = document.getElementById('form').getElementsByTagName('input')[0].value || '';
-    
+
       if (selectedTab.length > 0 && res.length > 0) {
         var addedString = localStorage.getItem(selectedTab) || '[]';
         var added = JSON.parse(addedString);
@@ -396,6 +284,10 @@
         added.push(res);
 
         localStorage.setItem(selectedTab, JSON.stringify(added))
+
+        
+
+        location.href = 'index.html';
       }
     }
   </script>
