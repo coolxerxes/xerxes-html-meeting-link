@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+ 
+<nav class="nav-container">
+
+  <ul class="left-side">
+     <li><a href="index.html">Meetinglink.site</a> </li>
+  </ul>
+  <ul class="left-side">
+    <li><a class="logout" href="family.html"><button class="family">Family Fun</button></a></li> 
+  </ul>
+
+  <ul class="right-side">
+    
+     
+     <li><a href="login.html" style="color:darkblue">Log Out</a></li>
+  </ul>
+
+ </nav>
+   
+    <marquee><h1><img src="runm.png"><img src="runw.png"><img src="runw.png"><img src="runm.png"></h1>
+    <h1 style="color:white; font-size: 15px;">!!Did you run today!!</h1></marquee>
+   
+<style>
+
+.family
+      {
+      background-color: rgb(0, 33, 150);
+      border-color: #000000;
+      border-width: 6px;
+      border-radius: 6px;
+      color:rgb(255, 255, 255);
+      width: 160px; 
+      cursor: pointer;
+      font-size: 15px;
+      font: bold;
+      }
+
+
+
+body
+{
+  background-color: rgb(0, 0, 0);
+}
+
+
+
+
+ *
+ {
+  padding: 0;
+  margin: 0;
+  box-sizing: corder-box;
+ }
+ body
+ {
+  width: 100%;
+  margin: 0 auto;
+ }
+ .nav-container
+ {
+  background-color:rgb(0, 0, 0);
+  border-bottom: 3px solid rgb(0, 34, 129);
+  display: flex;
+  justify-content: space-between;
+ }
+ .right-side, left-side
+ {
+  list-style-type: none;
+ }
+ .right-side li, .leftside li
+ {
+  display: inline-block;
+ }
+ 
+ .right-side li a, .left-side li a
+ {
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  font-size: 10px;
+  color:blue;
+  padding: 15px 10px;
+  font-weight: bold;
+ }
+
+ .left-side li a
+ {
+  height: 100%;
+  width: -5%;
+  font-size: 10px;
+ }
+  
+ .family2
+ {
+  position:absolute;
+  right: 0.6%;
+  border-radius: 5px;
+  color:rgb(255, 255, 255);
+  font-size: 20px;
+  background-color: rgb(1, 1, 154);
+  cursor: pointer;
+  width: 220px;
+ }
+
+</style>
+
+ 
+ 
+
+<style>
+
+
+
+ 
+  /*container to center the map*/
+  #container {
+    height: 20vh;
+    display: flex;
+    justify-content: right;
+    
+  }
+   #map {
+    height: 44vh;
+    width: 55vw;
+   }
+   html, body{
+    margin: 0;
+    padding: 0;
+   }
+
+   
+
+</style>
+
+
+
+<body><br>
+  <a href="teamfunctions.html"><button class=family4>Team Function</button></a>
+<br><br>
+
+
+<div id="container">
+  <div id="map">
+   
+  </div>
+</div>
+
+<script> 
+
+
+  function initMap() {
+
+    let mapOptions = {
+      center: {lat: 26.60775105325326, lng:-81.94498671487925},
+      zoom: 10,
+      mapId: 'b4762a932ac83060',
+    }
+
+    let map = new google.maps.Map(document.getElementById('map'),mapOptions);
+  }
+</script>
+
+<script src="https:maps.googleapis.com/maps/api/js?key=AIzaSyBJFNO8DbbNEa82seuZX15PUoK2gShqdFs&map_ids=b4762a932ac83060&callback=initMap">
+</script>
+ 
+<body>
+  
+          <br><br><br><br><br><br> <br><br><br><br><br>
+        <a href="familyfunctions.html"><button class=family2>Create Family Function</button></a>
+          <br><br>
+          
+
+ <a href="familyphotos.html"><button class=family3 familyphoto.html>Family Photos</button></a>
+ 
+<img  src="family-tree.jpg" class="familytree">
+
+   <style>
+
+.family4
+ {
+  position:absolute;
+  right: 8%;
+  border-radius: 5px;
+  color:rgb(255, 255, 255);
+  font-size: 18px;
+  background-color: rgb(20, 95, 0);
+  cursor: pointer;
+  width: 170px;
+ }
+
+
+.family3
+ {
+  position:absolute;
+  right: 8%;
+  border-radius: 5px;
+  color:rgb(3, 102, 0);
+  font-size: 18px;
+  background-color: rgba(243, 233, 233, 0.582);
+  cursor: pointer;
+  width: 140px;
+ }
+
+.familytree
+{
+  
+  display:block;
+  margin-left: auto;
+  
+  
+ 
+  width: 210px;
+  height: 270px;
+ 
+}
+
+   </style>
+  
+
+  
+</body>
+</html>

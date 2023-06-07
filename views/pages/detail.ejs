@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/styles/styles.css">
+
+    <title>Document</title>
+</head>
+
+<nav class="nav-container">
+
+    <ul class="left-side">
+        <li><a href="/">Meetinglink.site</a> </li>
+    </ul>
+    <ul class="left-side">
+        <li><a class="logout" href="family.html"><button class="family">Family Fun</button></a></li>
+    </ul>
+
+    <ul class="right-side">
+
+        <li><a href="login.html" style="color:darkblue">Log Out</a></li>
+    </ul>
+
+</nav>
+
+<style>
+    #container {
+        height: 72vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #map {
+        height: 70vh;
+        width: 85vw;
+    }
+
+
+    .family {
+        background-color: rgb(0, 33, 150);
+        border-color: #000000;
+        border-width: 6px;
+        border-radius: 6px;
+        color: rgb(255, 255, 255);
+        width: 120px;
+        cursor: pointer;
+        font-size: 15px;
+        font: bold;
+    }
+
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: corder-box;
+    }
+
+    body {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .nav-container {
+        background-color: rgb(0, 0, 0);
+        border-bottom: 3px solid rgb(0, 34, 129);
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .right-side,
+    left-side {
+        list-style-type: none;
+    }
+
+    .right-side li,
+    .leftside li {
+        display: inline-block;
+    }
+
+    .right-side li a,
+    .left-side li a {
+        text-decoration: none;
+        display: block;
+        width: 100%;
+        font-size: 10px;
+        color: blue;
+        padding: 15px 10px;
+        font-weight: bold;
+    }
+
+    .left-side li a {
+        height: 100%;
+        width: -5%;
+        font-size: 10px;
+    }
+</style>
+
+
+
+</head>
+
+
+<!-------------------------------PARENT--------------------------------------->
+<style>
+    .parent {
+        margin-right: px;
+        float: right;
+        width: 130px;
+        height: 50px;
+    }
+</style>
+
+<!------------------------------JS----Button----exc.....------------------------------>
+
+<body>
+
+    <style>
+        .parent {
+            background-color: rgb(0, 0, 0);
+            color: #419a26;
+            color: rgb(255, 255, 255);
+            font-size: 18px;
+            border-radius: 5px;
+            border-color: rgb(2, 177, 11);
+            border-width: 4px;
+            box-shadow: 0 0 5px rgb(255, 255, 255);
+            border-radius: 10px;
+        }
+
+
+        #div2 {
+            width: 27.33%;
+            float: right;
+        }
+
+        #div3 {
+            width: 220.33%;
+            float: right;
+
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #000000;
+        }
+
+
+        input[type='text'],
+        input[name='password'] {
+            background-color: rgb(0, 0, 0);
+            color: white;
+            border: 1px solid #ffffff;
+            width: 350px;
+            height: 35px;
+            border-radius: 7px;
+            font-size: large;
+        }
+
+
+
+
+
+        h2 {
+            color: rgb(255, 255, 255);
+            font-size: 35px;
+        }
+
+        .save {
+            font-size: 25px;
+            background-color: rgb(0, 33, 150);
+            border-color: #000000;
+            border-width: 6px;
+            border-radius: 6px;
+            color: rgb(0, 0, 0);
+            width: 150px;
+            cursor: pointer;
+            font-size: 21px;
+            font: bold;
+        }
+
+        label {
+
+            font-size: 20px;
+            color: rgb(243, 243, 243);
+            margin-left: 7px;
+
+        }
+    </style>
+
+    <style type="text/css">
+        label {
+
+            display: inline-block'
+
+        }
+
+        #form {
+            border-radius: 10px;
+            ;
+            width: 20px;
+            padding: 4px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+    </style>
+
+
+    <div id="form" style="float: left">
+
+
+        <label>Name</label>
+        <h3 type="text" name="name" id="name" style="color: white; margin: 10px"></h3>
+
+        <label>address</label>
+        <h3 type="text" name="address" id="address" style="color: white; margin: 10px"></h3>
+
+        <label>phone</label>
+        <h3 type="text" name="phone number" id="phone" style="color: white; margin: 10px"></h3>
+
+        <label>Hours</label>
+        <h3 type="text" name="hours" id="hours" style="color: white; margin: 10px"></h3>
+
+        <label>Website</label>
+        <h3 type="text" name="website" id="website" style="color: white; margin: 10px"></h3>
+
+        <label>Description</label>
+        <h3 type="text" name="description" id="description" style="color: white; margin: 10px"></h3>
+
+        <label>Latitude</label>
+        <h3 type="text" name="password" id="latitude" style="color: white; margin: 10px"></h3>
+
+        <label>Longitude</label>
+        <h3 type="text" name="longitude" id="longitude" style="color: white; margin: 10px"></h3>
+
+        <button class="save">
+            <a class="submit" style=color:white onclick="onDetailClick()">Edit</a>
+        </button>
+
+    </div>
+
+    <div style="float: right;">
+        <div id="map">
+
+        </div>
+    </div>
+
+    </form>
+
+</body>
+<script>
+
+
+
+    function onDetailClick() {
+        location.href = `/hostpost?id=${window.id}`;
+    }
+
+    function initMap() {
+        const test = location.search.slice(1).split('=');
+
+        if (test.length === 2) {
+            window.id = test[1];
+
+            fetch('/api/imageMap')
+                .then(info => info.json())
+                .then(imageMap => {
+                    window.imageMap = imageMap;
+
+                    fetch('/api/item/' + window.id)
+                        .then(info => info.json())
+                        .then(building => {
+                            if (building) {
+                                window.eventId = building.eventId;
+                                document.getElementById('name').textContent = building.name;
+                                document.getElementById('address').textContent = building.address;
+                                document.getElementById('phone').textContent = building.phone;
+                                document.getElementById('hours').textContent = building.hours;
+                                document.getElementById('website').textContent = building.website;
+                                document.getElementById('longitude').textContent = building.longitude;
+                                document.getElementById('latitude').textContent = building.latitude;
+                                document.getElementById('description').textContent = building.description;
+
+                                let mapOptions = {
+                                    center: {
+                                        lat: building.latitude,
+                                        lng: building.longitude,
+                                    },
+                                    zoom: 10,
+                                    mapId: 'b4762a932ac83060',
+                                }
+
+                                let map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+                                const marker = new google.maps.Marker({
+                                    icon: `https://firebasestorage.googleapis.com/v0/b/connect-cbff7.appspot.com/o/${window.imageMap[building.eventId]}.png?alt=media&token=xerxes`,
+                                    map,
+                                    position: {
+                                        lat: building.latitude,
+                                        lng: building.longitude,
+                                    },
+                                    title: building.name,
+                                });
+                            }
+                        })
+                })
+
+
+        }
+
+
+    }
+</script>
+
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJFNO8DbbNEa82seuZX15PUoK2gShqdFs&map_ids=b4762a932ac83060&callback=initMap">
+    </script>
+
+
+</html>
+
+
+
+
+
+
+
+
+
+</html>

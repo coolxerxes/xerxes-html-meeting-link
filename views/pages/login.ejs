@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-signin-client_id"
+    content="1061071120688-co4kulfm58r4dgnstitpgec0jm30fitb.apps.googleusercontent.com">
+  <title>registration-page</title>
+  <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-auth-compat.js"></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+
+</head>
+
+<body>
+  <div id="fb-root"></div>
+  <script async defer crossorigin="anonymous"
+    src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v17.0&appId=1419405502157561&autoLogAppEvents=1"
+    nonce="NEW7fiNu"></script>
+
+  <script>
+
+    const db = firebase.firestore();
+    const usersCollection = firebase.firestore().collection('users');
+
+    // Access the Firestore database
+    async function submitForm() {
+      let email = document.getElementById("login_email");
+      let password = document.getElementById("login_pass");
+      if (!email.value || !password.value) return alert("Please enter complete information")
+      usersCollection.where('email', '==', email.value).get()
+        .then((querySnapshot) => {
+          if (!querySnapshot.empty) {
+            // User with the provided username found in Firestore
+            // Check the password
+            querySnapshot.forEach((doc) => {
+              const userData = doc.data();
+              if (userData.password === password.value) {
+                alert("Login successful!");
+                window.location.href = "main.html"
+              } else {
+                alert("Invalid password")
+              }
+            });
+          } else {
+            alert("User not found")
+          }
+        })
+        .catch((error) => {
+          console.log('Error getting user data:', error);
+        });
+    }
+  </script>
+
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .background-image {
+      background-image: url('/assets/images/logo.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      height: 100vh;
+
+    }
+
+    form {
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 350px;
+      height: 46s0px;
+      position: absolute;
+    }
+
+    input[type='text'],
+    input[name='password'] {
+      background-color: rgb(0, 0, 0);
+      color: white;
+      border: 1px solid #ffffff;
+      width: 270px;
+      height: 25px;
+      border-radius: 7px;
+    }
+
+    label {
+
+      font-size: 20px;
+      color: rgb(255, 255, 255);
+      float: left;
+      margin-left: 143px;
+
+    }
+
+    .password {
+      font-size: 20px;
+      color: rgb(255, 255, 255);
+      float: left;
+      margin-left: 117px;
+    }
+
+    .img {
+
+      width: 270px;
+    }
+
+    h2 {
+      color: rgb(255, 255, 255);
+      font-style: italic;
+      font-size: 35px;
+    }
+
+    .sub {
+      font-size: 25px;
+      background-color: rgb(0, 33, 150);
+      border-color: #000000;
+      border-width: 6px;
+      border-radius: 6px;
+      color: rgb(0, 0, 0);
+      width: 270px;
+      cursor: pointer;
+      font-size: 28px;
+      font: bold;
+    }
+
+
+    .sign {
+      font-size: 22px;
+      color: rgb(0, 0, 0);
+      height: 2
+    }
+
+
+    .signin {
+      font-size: 25px;
+      background-color: rgb(0, 33, 150);
+      border-color: #000000;
+      border-width: 6px;
+      border-radius: 6px;
+      color: rgb(0, 0, 0);
+      width: 150px;
+      cursor: pointer;
+      font-size: 21px;
+      font: bold;
+    }
+
+    .button3 {
+      cursor: pointer;
+    }
+  </style>
+
+
+
+  <center>
+    <form autocompleter="off">
+      <br><br><br>
+      <h2>Mettinglink.site</h2>
+      <div>
+        <br><br><br>
+
+        <div></div>
+        <div>
+          <button class="button3" type="button" onclick="loginWithFacebook()"><img class="img"
+              src="./assets/images/facebook11.png"></button>
+          <br><br>
+
+          <div onclick="signInWithGoogle()">
+            <button class="button3" type="button"><img class='img' src="./assets/images/google4.png"></button>
+            <br><br>
+          </div>
+
+
+
+          <h2>SIGN UP HERE</h2>
+
+
+          <label>email:</label>
+          <input type="text" name="email" id="login_email">
+        </div><br>
+
+        <div>
+          <label class="password">Password: <a style=color:white href="index.html"></a> </label><br>
+          <input type="password" name="password" id="login_pass">
+        </div><br>
+
+        <div>
+
+
+          <button class="signin" type="button">
+            <a class="submit" style=color:white onclick="signInWithEmail()">Sign in</a>
+          </button><br>
+
+          <span class="sign">
+            Not a Member?<a class="sign" href="registration-page.html"> Sign Up Now</a>
+          </span><br>
+
+
+
+          <br><button>
+            <h2 class="sub"><i href="meetinglink.html">subscription</i></h2>
+          </button>
+        </div></br>
+    </form>
+  </center>
+
+
+  <div class=" background-image"></div>
+
+
+  </div>
+  </div>
+</body>
+<script>
+  let params = {};
+
+  let regex = /([^&=]+)=([^&]*)/g, m;
+
+  while (m = regex.exec(location.href)) {
+    params[decodeURIComponent(m[1])] = decodeURIComponent(m[2])
+  }
+
+  function login(name, email, type, password = '') {
+    debugger;
+    const http = new XMLHttpRequest();
+
+    http.open('POST', '/api/login', true);
+    http.overrideMimeType('application/octet-stream')
+
+    http.onreadystatechange = function () {
+      if (http.readyState == 4 && http.status == 200) {
+        const response = JSON.parse(http.response);
+
+        if (response.status === 'SUCCESS') {
+          alert(`Welcome ${response.name}`)
+          location.href = '/'
+        } else {
+          alert(`ERROR ${response.message}`)
+        }
+      }
+    }
+
+    const form = new FormData();
+    form.append('name', name);
+    form.append('email', email);
+    form.append('type', type);
+    form.append('password', password)
+
+    http.send(form)
+  }
+
+  if (Object.keys(params).length > 0) {
+    localStorage.setItem('authInfo', JSON.stringify(params));
+
+    fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+      headers: {
+        'Authorization': `Bearer ${params['access_token']}`
+      }
+    })
+      .then(data => data.json())
+      .then(async (info) => {
+        console.log(info);
+        login(info.name, info.email, 'GOOGLE');
+      })
+
+  }
+
+  function signInWithEmail() {
+    const email = document.querySelector('input[name=email]').value;
+    const password = document.querySelector('input[name=password]').value;
+
+    login('', email, 'EMAIL', password);
+  }
+
+  function signInWithGoogle() {
+    let oauth2Entpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
+
+    let form = document.createElement('form');
+    form.setAttribute('method', 'POST');
+    form.setAttribute('action', oauth2Entpoint);
+
+    let params = {
+      "client_id": "1061071120688-co4kulfm58r4dgnstitpgec0jm30fitb.apps.googleusercontent.com",
+      "redirect_uri": "https://localhost:3000/login",
+      "response_type": "token",
+      "state": "pass-through-value",
+      "include_granted_scopes": "true",
+      "scope": "openid profile email https://www.googleapis.com/auth/userinfo.profile"
+    };
+
+    for (var p in params) {
+      let input = document.createElement('input');
+      input.setAttribute('type', 'hidden');
+      input.setAttribute('name', p)
+      input.setAttribute('value', params[p]);
+      form.appendChild(input);
+    }
+
+    document.body.appendChild(form)
+
+    form.submit();
+  }
+
+  function loginWithFacebook() {
+    FB.login(function (response) {
+      if (response.authResponse) {
+        console.log('Welcome!  Fetching your information.... ');
+        FB.api('/me', { fields: "name,email" }, function (response) {
+          console.log(response);
+          console.log('Good to see you, ' + response.name + '.');
+          login(response.name, response.email, 'FACEBOOK', '');
+        });
+      } else {
+        console.log('User cancelled login or did not fully authorize.');
+      }
+    }, { scope: 'public_profile,email' });
+  }
+
+  window.onload = function () {
+    FB.init({
+      appId: '1419405502157561',
+      status: true,
+      xfbml: true,
+      version: 'v2.7' // or v2.6, v2.5, v2.4, v2.3
+    });
+  }
+</script>
+</body>
+
+</html>

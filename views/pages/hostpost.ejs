@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/assets/styles/styles.css">
+  <title>Document</title>
+</head>
+
+<nav class="nav-container">
+
+  <ul class="left-side">
+    <li><a href="/">Meetinglink.site</a> </li>
+  </ul>
+  <ul class="left-side">
+    <li><a class="logout" href="family.html"><button class="family">Family Fun</button></a></li>
+  </ul>
+
+  <ul class="right-side">
+
+    <li><a href="login.html" style="color:darkblue">Log Out</a></li>
+  </ul>
+
+</nav>
+
+<style>
+  .family {
+    background-color: rgb(0, 33, 150);
+    border-color: #000000;
+    border-width: 6px;
+    border-radius: 6px;
+    color: rgb(255, 255, 255);
+    width: 120px;
+    cursor: pointer;
+    font-size: 15px;
+    font: bold;
+  }
+
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: corder-box;
+  }
+
+  body {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .nav-container {
+    background-color: rgb(0, 0, 0);
+    border-bottom: 3px solid rgb(0, 34, 129);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .right-side,
+  left-side {
+    list-style-type: none;
+  }
+
+  .right-side li,
+  .leftside li {
+    display: inline-block;
+  }
+
+  .right-side li a,
+  .left-side li a {
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    font-size: 10px;
+    color: blue;
+    padding: 15px 10px;
+    font-weight: bold;
+  }
+
+  .left-side li a {
+    height: 100%;
+    width: -5%;
+    font-size: 10px;
+  }
+</style>
+
+
+
+</head>
+
+
+<!-------------------------------PARENT--------------------------------------->
+<style>
+  .parent {
+    margin-right: px;
+    float: right;
+    width: 130px;
+    height: 50px;
+  }
+</style>
+
+<h2>Edit Activity </h2>
+
+<div class="scroll" id="categories">
+</div>
+
+<!-----------------------------CHILD--1--LIST--------------------------------->
+
+<ul>
+  <div class="child" id="events">
+
+  </div>
+</ul>
+
+
+<!------------------------------JS----Button----exc.....------------------------------>
+
+<script>
+
+  const eventTemplate = `<div id="_ID_">
+          <label>
+            <input type="checkbox" name="list">
+            <span>_TITLE_</span>
+          </label>
+        </div>
+      `
+
+  function onEventClick(id) {
+    var elements = document.getElementsByClassName("parentlist");
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].classList.remove('bak');
+    }
+
+    document.getElementById(id).classList.add('bak');
+
+    fetch(`/api/categories/${id}`)
+      .then(info => info.json())
+      .then(data => {
+        document.getElementById('events').innerHTML = data
+          .map(item => {
+            return eventTemplate.replace('_TITLE_', item.title).replace('_ID_', item.id)
+          })
+      })
+  }
+
+  window.onload = function () {
+
+    const categoryTemplate = '<div class="parentlist" id="_ID_"><button class="parent" onclick="onEventClick(\'_ID_\')">_TITLE_</div></button>';
+
+    fetch('/api/categories')
+      .then((info) => info.json())
+      .then(data => {
+        console.log(data);
+        document.getElementById('categories').innerHTML = data
+          .map((item) => {
+            return categoryTemplate.replace(/_ID_/g, item.id).replace('_TITLE_', item.title)
+          })
+          .join('');
+      })
+  }
+
+</script>
+
+
+
+
+
+
+
+<body>
+
+  <style>
+    .parent {
+      background-color: rgb(0, 0, 0);
+      color: #419a26;
+      color: rgb(255, 255, 255);
+      font-size: 18px;
+      border-radius: 5px;
+      border-color: rgb(2, 177, 11);
+      border-width: 4px;
+      box-shadow: 0 0 5px rgb(255, 255, 255);
+      border-radius: 10px;
+    }
+
+
+    #div2 {
+      width: 27.33%;
+      float: right;
+    }
+
+    #div3 {
+      width: 220.33%;
+      float: right;
+
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #000000;
+    }
+
+
+    input[type='text'],
+    input[name='password'] {
+      background-color: rgb(0, 0, 0);
+      color: white;
+      border: 1px solid #ffffff;
+      width: 350px;
+      height: 35px;
+      border-radius: 7px;
+      font-size: large;
+    }
+
+
+
+
+
+    h2 {
+      color: rgb(255, 255, 255);
+      font-size: 35px;
+    }
+
+    .save {
+      font-size: 25px;
+      background-color: rgb(0, 33, 150);
+      border-color: #000000;
+      border-width: 6px;
+      border-radius: 6px;
+      color: rgb(0, 0, 0);
+      width: 150px;
+      cursor: pointer;
+      font-size: 21px;
+      font: bold;
+    }
+
+    label {
+
+      font-size: 20px;
+      color: rgb(243, 243, 243);
+      margin-left: 7px;
+
+    }
+  </style>
+
+  <style type="text/css">
+    label {
+
+      display: inline-block'
+
+    }
+
+    #form {
+      border-radius: 10px;
+      ;
+      width: 20px;
+      padding: 4px;
+    }
+
+    h2 {
+      text-align: center;
+    }
+  </style>
+
+
+
+
+  <div id="form">
+
+
+    <label>Name</label>
+    <input type="text" name="name" id="name"><br>
+
+    <label>address</label>
+    <input type="text" name="address" id="address"><br>
+
+    <label>phone</label>
+    <input type="text" name="phone number" id="phone">
+
+    <label>Hours</label>
+    <input type="text" name="hours" id="hours">
+
+    <label>Website</label>
+    <input type="text" name="website" id="website"><br>
+
+    <label>Description</label>
+    <input type="text" name="description" id="description"><br>
+
+    <label>Latitude</label>
+    <input type="text" name="password" id="latitude"><br>
+
+    <label>Longitude</label>
+    <input type="text" name="longitude" id="longitude"><br>
+
+    <br>
+    <button class="save">
+      <a class="submit" style=color:white onclick="onSaveClick()">save</a>
+    </button>
+
+  </div>
+  </form>
+
+</body>
+<script>
+
+  const test = location.search.slice(1).split('=');
+
+  if (test.length === 2) {
+    window.id = test[1];
+
+    fetch('/api/item/' + window.id)
+      .then(info => info.json())
+      .then(building => {
+        if (building) {
+          window.eventId = building.eventId;
+          document.getElementById('name').value = building.name;
+          document.getElementById('address').value = building.address;
+          document.getElementById('phone').value = building.phone;
+          document.getElementById('hours').value = building.hours;
+          document.getElementById('website').value = building.website;
+          document.getElementById('longitude').value = building.longitude;
+          document.getElementById('latitude').value = building.latitude;
+          document.getElementById('description').value = building.description;
+        }
+      })
+  }
+
+  function onSaveClick() {
+    var name = document.getElementById('name').value;
+    var address = document.getElementById('address').value;
+    var phone = document.getElementById('phone').value;
+    var hours = document.getElementById('hours').value;
+    var website = document.getElementById('website').value;
+    var description = document.getElementById('description').value;
+    var longitude = document.getElementById('longitude').value;
+    var latitude = document.getElementById('latitude').value;
+
+    const inputs = document.querySelectorAll('input[type=checkbox]');
+
+    let eventId = window.eventId || '';
+    for (let i = 0; i < inputs.length; ++i) {
+      if (inputs[i].checked == true) {
+        eventId = inputs[i].parentNode.parentElement.id;
+        break;
+      }
+    }
+
+    if (name.length > 0 && longitude.length > 0 && latitude.length > 0 && eventId.length > 0) {
+
+      const http = new XMLHttpRequest();
+
+      if (window.id) {
+        http.open('PATCH', '/api/item', true);
+      } else {
+        http.open('POST', '/api/item', true);
+      }
+
+      http.overrideMimeType('application/octet-stream')
+
+      http.onreadystatechange = function () {
+        if (http.readyState == 4 && http.status == 200) {
+          location.href = '/';
+        }
+      }
+
+      const form = new FormData();
+
+      form.append('id', window.id);
+      form.append('name', name);
+      form.append('address', address);
+      form.append('phone', phone);
+      form.append('hours', hours);
+      form.append('website', website);
+      form.append('description', description);
+      form.append('longitude', +longitude);
+      form.append('latitude', +latitude);
+      form.append('eventId', eventId);
+
+      http.send(form)
+    }
+  }
+</script>
+
+
+</html>
+
+
+
+
+
+
+
+
+
+</html>
