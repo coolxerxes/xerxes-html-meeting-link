@@ -4,11 +4,15 @@ const path = require('path')
 const PORT = process.env.PORT || 5001
 
 express()
-  .use(express.static(path.join(__dirname, 'public')))
+  .use('/assets', express.static(path.join(__dirname, 'public')))
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('pages/index'))
   .get('/login', (req, res) => res.render('pages/login'))
+  .get('/hostpost', (req, res) => res.render('pages/hostpost'))
+  .get('/register', (req, res) => res.render('pages/registration-page'))
+  .get('/family', (req, res) => res.render('family'))
+  .get('/detail', (req, res) => res.render('detail'))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
 
