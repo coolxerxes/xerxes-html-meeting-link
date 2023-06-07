@@ -1,21 +1,34 @@
-// var express = require('express');
-// var exphbs = require('express-handlebars');
-// var fileUpload = require('express-fileupload');
-// var fs = require('fs');
-// var http = require('http');
-// const usersRepository = require('./models/users.repository');
-// const categoriesRepository = require('./models/categories.repository');
-// const eventsRepository = require('./models/events.repository');
-// const itemsRepository = require('./models/items.repository');
-
+// const express = require('express')
 // const path = require('path')
 
 // const PORT = process.env.PORT || 5001
 
-// const app = express()
+// express()
+//   .use(express.static(path.join(__dirname, 'public')))
+//   .set('views', path.join(__dirname, 'views'))
+//   .set('view engine', 'ejs')
+//   .get('/', (req, res) => res.render('pages/index'))
+  // .listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
-// app.set("views", path.join(__dirname, "views"));
-// app.set('view engine', 'hbs');
+
+var express = require('express');
+var exphbs = require('express-handlebars');
+var fileUpload = require('express-fileupload');
+var fs = require('fs');
+var http = require('http');
+const usersRepository = require('./models/users.repository');
+const categoriesRepository = require('./models/categories.repository');
+const eventsRepository = require('./models/events.repository');
+const itemsRepository = require('./models/items.repository');
+
+const path = require('path')
+
+const PORT = process.env.PORT || 5001
+
+const app = express()
+
+app.set("views", path.join(__dirname, "views"));
+app.set('view engine', 'hbs');
 // var router = express.Router();
 
 // app.use(express.urlencoded({
@@ -150,16 +163,5 @@
 //   // .set('view engine', 'ejs')
 //   // .get('/', (req, res) => res.render('pages/index'))
 
-// app.listen(PORT, () => console.log(`Listening on ${ PORT }`))
+app.listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
-const express = require('express')
-const path = require('path')
-
-const PORT = process.env.PORT || 5001
-
-express()
-  .use(express.static(path.join(__dirname, 'public')))
-  .set('views', path.join(__dirname, 'views'))
-  .set('view engine', 'ejs')
-  .get('/', (req, res) => res.render('pages/index'))
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`))
