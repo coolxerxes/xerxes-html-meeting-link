@@ -1,66 +1,361 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <%- include ("../partials/header.ejs") %>
-</head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/assets/styles/styles.css">
+  <title>Document</title>
 
-<body>
+  <!----------------------------------HEAD---------------------------------------------->
 
-  <%- include ("../partials/nav.ejs") %>
+  <head>
+    <div class="hero">
+      <div class="container">
+        <style>
+          * {
+            padding: 0;
+            margin: 0;
+            box-sizing: corder-box;
+          }
 
-<div class="jumbotron text-center">
-  <div class="container">
-    <a href="/" class="lang-logo">
-      <img src="/lang-logo.png">
-    </a>
-    <h1>Getting Started on Heroku with Node.js</h1>
-    <p>This is a sample Node application deployed to Heroku. It's a reasonably simple app - but a good foundation for understanding how to get the most out of the Heroku platform.</p>
-    <a type="button" class="btn btn-lg btn-default" href="https://devcenter.heroku.com/articles/getting-started-with-nodejs"><span class="glyphicon glyphicon-flash"></span> Getting Started on Heroku with Node.js</a>
-    <a type="button" class="btn btn-lg btn-primary" href="https://github.com/heroku/node-js-getting-started"><span class="glyphicon glyphicon-download"></span> Source on GitHub</a>
-  </div>
-</div>
-<div class="container">
-  <div class="alert alert-info text-center" role="alert">
-    To deploy your own copy, and learn the fundamentals of the Heroku platform, head over to the <a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs" class="alert-link">Getting Started on Heroku with Node.js</a> tutorial.
-  </div>
-  <hr>
-  <div class="row">
-    <div class="col-md-6">
-      <h3><span class="glyphicon glyphicon-info-sign"></span> How this sample app works</h3>
-      <ul>
-        <li>This app was deployed to Heroku, either using Git or by using <a href="https://github.com/heroku/node-js-getting-started">Heroku Button</a> on the repository.</li>
+          body {
+            width: 100%;
+            margin: 0 auto;
+          }
 
-        <li>When Heroku received the source code, it fetched all the dependencies in the <a href="https://github.com/heroku/node-js-getting-started/blob/main/package.json">package.json</a>, creating a deployable slug.</li>
-        <li>The platform then spins up a dyno, a lightweight container that provides an isolated environment in which the slug can be mounted and executed.</li>
-        <li>You can scale your app, manage it, and deploy over <a href="https://addons.heroku.com/">150 add-on services</a>, from the Dashboard or CLI.</li>
-      </ul>
+          .nav-container {
+            background-color: rgb(0, 0, 0);
+            border-bottom: 3px solid rgb(0, 34, 129);
+            display: flex;
+            justify-content: space-between;
+          }
+
+          .right-side,
+          left-side {
+            list-style-type: none;
+          }
+
+          .right-side li,
+          .leftside li {
+            display: inline-block;
+          }
+
+          .right-side li a,
+          .left-side li a {
+            text-decoration: none;
+            display: block;
+            width: 100%;
+            font-size: 15px;
+            color: blue;
+            padding: 14px 16px;
+            font-weight: bold;
+          }
+
+          .left-side li a {
+            height: 100%;
+            width: -5%;
+            font-size: 10px;
+          }
+
+
+          .family {
+            background-color: rgb(0, 33, 150);
+            border-color: #000000;
+            border-width: 6px;
+            border-radius: 6px;
+            color: rgb(255, 255, 255);
+            width: 120px;
+            cursor: pointer;
+            font-size: 15px;
+            font: bold;
+          }
+
+          .h {
+            background-color: rgb(0, 33, 150);
+            border-color: #000000;
+            border-width: 6px;
+            border-radius: 6px;
+            color: rgb(255, 255, 255);
+            width: 25px;
+            cursor: pointer;
+            font-size: 15px;
+            font: bold;
+          }
+        </style>
+
+
+        <nav class="nav-container">
+
+          <ul class="left-side">
+            <li><a href="">Meetinglink.site</a></li>
+          </ul>
+          <li><a class="logout" href="/catagorypost"><button class="h">C</button></a></li>
+          <li><a class="logout" onclick="getLocation()"><button class="h">G</button></a></li>
+          <li><a class="logout" href="/family"><button class="family">Family Fun</button></a></li>
+
+          </ul>
+
+
+          <ul class="right-side"></ul>
+          <li><a class="logout" href="/hostpost"><button class="h">P</button></a></li>
+          <li><a href="/login" style="color:darkblue">log out</a></li>
+          </ul>
+
+        </nav>
+
+        </script>
+
+
+        <!---------------------------------MAP--------------------------------------------->
+
+
+
+        <style>
+          /*container to center the map*/
+          #container {
+            height: 72vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+
+          #map {
+            height: 70vh;
+            width: 85vw;
+          }
+
+          html,
+          body {
+            margin: 0;
+            padding: 0;
+          }
+        </style>
+
+  <body>
+
+    <div id="container">
+      <div id="map"></div>
     </div>
-    <div class="col-md-6">
-      <h3><span class="glyphicon glyphicon-link"></span> Next Steps</h3>
-      <ul>
-        <li>If you are following the <a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs">Getting Started</a> guide, then please head back to the tutorial and follow the next steps!</li>
-        <li>If you deployed this app by deploying the Heroku Button, then in a command line shell, run:</li>
-        <ul>
-          <li><code>git clone https://github.com/heroku/node-js-getting-started.git</code> - this will create a local copy of the source code for the app</li>
-          <li><code>cd node-js-getting-started</code> - change directory into the local source code repository</li>
-          <li><code>heroku git:remote -a &lt;your-app-name></code> - associate the Heroku app with the repository</li>
-          <li>You'll now be set up to run the app locally, or <a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs#push-local-changes">deploy changes</a> to Heroku</li>
-        </ul>
-      </ul>
-      <h3><span class="glyphicon glyphicon-link"></span> Helpful Links</h3>
-      <ul>
-        <li><a href="https://www.heroku.com/home">Heroku</a></li>
-        <li><a href="https://devcenter.heroku.com/">Heroku Dev Center</a></li>
-        <li><a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs">Getting Started on Heroku with Node.js</a></li>
-        <li><a href="https://devcenter.heroku.com/articles/deploying-nodejs">Deploying Node Apps on Heroku</a></li>
-      </ul>
+
+    <script>
+      widnow.categories = [];
+      const test = location.search.slice(1).split('=');
+
+      if (test.length === 2 && test[1].length != 0) {
+        window.categories = test[1].split(',').map(_item => decodeURI(_item));
+      }
+
+      function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+          alert('Geolocation is not supported by this browser.')
+        }
+      }
+
+      function showPosition(position) {
+        //x.innerHTML = "Latitude: " + position.coords.latitude +
+        //  "<br>Longitude: " + position.coords.longitude;
+
+        window.map.setCenter({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        })
+      }
+
+      function initMap() {
+        let mapOptions = {
+          center: { lat: 26.60775105325326, lng: -81.94498671487925 },
+          zoom: 10,
+          mapId: 'b4762a932ac83060',
+        }
+
+        window.map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+        let infoWindow = new google.maps.InfoWindow();
+
+        fetch('/api/imageMap')
+          .then(info => info.json())
+          .then(imageMap => {
+            window.imageMap = imageMap;
+
+            fetch(window.categories.length > 0 ? `/api/item/filter/${window.categories.join(',')}` : '/api/item')
+              .then((info) => info.json())
+              .then(data => {
+                document.getElementById('table').innerHTML = data
+                  .map((tr) => {
+                    const marker = new google.maps.Marker({
+                      icon: `https://firebasestorage.googleapis.com/v0/b/connect-cbff7.appspot.com/o/${window.imageMap[tr.eventId]}.png?alt=media&token=xerxes`,
+                      map: window.map,
+                      position: {
+                        lat: tr.latitude, lng: tr.longitude,
+                      },
+                      title: tr.name,
+                    });
+                    marker.addListener('click', () => { //(markers can only be keyboard focusable when they have click listeners)
+                      let contentString = `<dl class="row bg-white text-dark adaptive"><h2 id="heading${tr.id}">${marker.title}</h2>`;
+                      delete tr.eventId;
+                      for (const [key, value] of Object.entries(tr)) {
+                        if (key !== 'Id') {
+                          contentString += `<dt class="col-6">${key}</dt><dd class="col-6">`;
+                          if (key === 'Website') {
+                            contentString += `<a href="${value}">${value}</a>`;
+                          }
+                          else {
+                            contentString += value;
+                          }
+                          contentString += '</dd>';
+                        }
+                      }
+                      contentString += `</dl><a href="/detail?id=${tr.id}">Details</a>`;
+                      infoWindow.setContent(contentString);
+                      infoWindow.open(map, marker);
+                    });
+
+                    return `<tr>
+                  <td>
+                   ${tr.name}
+                   </td><td>${tr.address}</td><td>${tr.phone}</td ><td>${tr.hours}</td><td>${tr.website}</td><td><a href="/hostpost?id=${tr.id}">Edit</a><a onclick="onDelete(${tr.id})">Delete</a></td></tr >`
+                  }).join('')
+              })
+          })
+      }
+
+    </script>
+
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJFNO8DbbNEa82seuZX15PUoK2gShqdFs&map_ids=b4762a932ac83060&callback=initMap">
+      </script>
+
+    <!-------------------------------PARENT--------------------------------------->
+    <style>
+      .parent {
+        margin-right: px;
+        float: right;
+        width: 130px;
+        height: 50px;
+      }
+    </style>
+    <div class="scroll" id="categories">
     </div>
-  </div> <!-- row -->
-   <div class="alert alert-info text-center" role="alert">
-    Please do work through the Getting Started guide, even if you do know how to build such an application.  The guide covers the basics of working with Heroku, and will familiarize you with all the concepts you need in order to build and deploy your own apps.
-  </div>
-</div>
+
+    <!-----------------------------CHILD--1--LIST--------------------------------->
+
+    <ul>
+      <div class="child" id="events">
+
+      </div>
+    </ul>
+
+    <!------------------------------JS----Button----exc.....------------------------------>
+
+    <script>
+      function onDelete(id) {
+        const buildings = JSON.parse(localStorage.getItem('host') || '[]');
+
+        const newBuildings = buildings.filter(_building => _building.id != id);
+
+        localStorage.setItem('host', JSON.stringify(newBuildings));
+
+        location.href = '/';
+      }
+
+    </script>
+
+    <!------------------------------SUMMIT-BUTTON------------------------------------->
+
+    <button class="summit" onclick="onSubmit()">summit !!!!</button>
+
+    <div>
+      <table style="color: white;">
+        <thead>
+          <td style="width: 300">
+            Name
+          </td>
+          <td style="width: 400">
+            Address
+          </td>
+          <td style="width: 400">
+            Phone Number
+          </td>
+          <td style="width: 500">
+            Hours of Operation
+          </td>
+          <td style="width: 400">
+            Website
+          </td>
+        </thead>
+        <tbody id="table">
+
+        </tbody>
+      </table>
+    </div>
+
+    <script>
+
+      function onSubmit() {
+        const inputs = document.querySelectorAll('input[type=checkbox]');
+
+        let categories = [];
+        for (let i = 0; i < inputs.length; ++i) {
+          if (inputs[i].checked == true) {
+            var category = inputs[i].parentNode.parentElement.id;
+            categories.push(category);
+          }
+        }
+
+        alert(categories.join(','));
+
+        location.href = `?filter=${categories.join(',')}`;
+      }
+
+      const eventTemplate = `<div id="_ID_">
+          <label>
+            <input type="checkbox" name="list">
+            <span>_TITLE_</span>
+          </label>
+        </div>
+      `
+
+      function onEventClick(id) {
+        var elements = document.getElementsByClassName("parentlist");
+        for (var i = 0; i < elements.length; i++) {
+          elements[i].classList.remove('bak');
+        }
+
+        document.getElementById(id).classList.add('bak');
+
+        fetch(`/api/categories/${id}`)
+          .then(info => info.json())
+          .then(data => {
+            document.getElementById('events').innerHTML = data
+              .map(item => {
+                return eventTemplate.replace('_TITLE_', item.title).replace('_ID_', item.id)
+              })
+          })
+      }
+
+      window.onload = function () {
+
+        const categoryTemplate = '<div class="parentlist" id="_ID_"><button class="parent" onclick="onEventClick(\'_ID_\')">_TITLE_</div></button>';
+
+        fetch('/api/categories')
+          .then((info) => info.json())
+          .then(data => {
+            console.log(data);
+            document.getElementById('categories').innerHTML = data
+              .map((item) => {
+                return categoryTemplate.replace(/_ID_/g, item.id).replace('_TITLE_', item.title)
+              })
+              .join('');
+          })
 
 
-</body>
+      }
+    </script>
+
+  </body>
+
 </html>
