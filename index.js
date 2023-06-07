@@ -28,7 +28,7 @@ const PORT = process.env.PORT || 5001
 const app = express()
 
 app.set("views", path.join(__dirname, "views"));
-app.set('view engine', 'hbs');
+app.set('view engine', 'ejs');
 // var router = express.Router();
 
 // app.use(express.urlencoded({
