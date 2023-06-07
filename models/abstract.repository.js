@@ -21,7 +21,7 @@ class AbstractRepository {
       .firestore()
       .collection(collection)
 
-    this.bucket = initialApp.storage().bucket('gs://connect-cbff7.appspot.com');
+    // this.bucket = initialApp.storage().bucket('gs://connect-cbff7.appspot.com');
   }
 }
 
