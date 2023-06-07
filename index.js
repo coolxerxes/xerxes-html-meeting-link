@@ -1,11 +1,109 @@
 const express = require('express')
 const path = require('path')
+const fileUpload = require('express-fileupload');
 const usersRepository = require('./models/users.repository');
+const categoriesRepository = require('./models/categories.repository');
+const eventsRepository = require('./models/events.repository');
+const itemsRepository = require('./models/items.repository');
 
 const PORT = process.env.PORT || 5001
+const router = express.Router();
+
+// eventsRepository.addEvents('sdfsdf', 'sdfsdf', './public/images/Boxing Gyms.png');
+
+router.post('/upload', async function(req, res) {
+  const title = req.body.name;
+  const categoryId = req.body.categoryId;
+  const file = req.files.file;
+
+  file.mv(`./public/images/${title}.png`, async (err) => {
+    if (err) {
+      return console.log(err)
+    }
+
+    await eventsRepository.addEvents(categoryId, title, `./public/images/${title}.png`)
+
+    res.sendStatus(200);
+  })
+  
+});
+
+router.post('/login', async function(req, res) {
+  const { email, type, password } = req.body;
+
+  const result = await usersRepository.login(email, type, password);
+
+  res.status(200).json(result);
+});
+
+router.post('/register', async function (req, res) {
+  const { name, email, type, password } = req.body;
+
+  const result = await usersRepository.register(name, email, type, password);
+
+  res.status(200).json(result);
+});
+
+router.get('/categories', async function (req, res) {
+  const categories = await categoriesRepository.getCategoryList();
+
+  res.status(200).json(categories);
+})
+
+router.get('/categories/:id', async function (req, res) {
+  const id = req.params.id;
+  const events = await eventsRepository.getEventListByCategoryId(id);
+
+  res.status(200).json(events);
+})
+
+router.post('/item', async function (req, res) {
+  const { name, address, phone, hours, website, description, latitude, longitude, eventId } = req.body;
+
+  const result = await itemsRepository.addItem(name, address, phone, hours, website, description, +latitude, +longitude, eventId);
+
+  res.sendStatus(200);
+});
+
+router.get('/imageMap', async function (req, res) {
+  const result = await eventsRepository.getEventImageMap();
+
+  res.status(200).json(result);
+})
+
+router.patch('/item', async function (req, res) {
+  const { name, address, phone, hours, website, description, latitude, longitude, eventId, id } = req.body;
+
+  await itemsRepository.updateItem(id, name, address, phone, hours, website, description, +latitude, +longitude, eventId);
+
+  res.sendStatus(200);
+});
+
+router.get('/item', async function (req, res) {
+  const result = await itemsRepository.getItemList();
+
+  res.status(200).json(result);
+})
+
+router.get('/item/filter/:ids', async function (req, res) {
+  const idsString = req.params.ids;
+  const result = await itemsRepository.getItemListByEvents(idsString.split(','));
+
+  res.status(200).json(result);
+})
+
+router.get('/item/:id', async function (req, res) {
+  const id = req.params.id;
+
+  const result = await itemsRepository.getItemById(id);
+
+  res.status(200).json(result);
+})
 
 express()
   .use('/assets', express.static(path.join(__dirname, 'public')))
+  .use(fileUpload())
+  .use('/api', router)
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('pages/index'))
