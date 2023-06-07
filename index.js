@@ -12,7 +12,7 @@ const initialApp = firebaseAdmin
             clientEmail: 'firebase-adminsdk-8mtyv@connect-cbff7.iam.gserviceaccount.com',
           })
         },
-        collection
+        'users'
       )
 
     initialApp
