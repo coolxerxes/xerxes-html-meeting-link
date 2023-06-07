@@ -21,7 +21,7 @@ class AbstractRepository {
       .firestore()
       .collection(collection)
 
-    this.bucket = initialApp.storage().bucket(process.env.BUCKET);
+    // this.bucket = initialApp.storage().bucket(process.env.BUCKET);
   }
 }
 
