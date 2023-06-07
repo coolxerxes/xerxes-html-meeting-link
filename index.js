@@ -17,7 +17,7 @@ const initialApp = firebaseAdmin
 
     initialApp
       .firestore()
-      .collection(collection)
+      .collection('users')
 const PORT = process.env.PORT || 5001
 
 express()
