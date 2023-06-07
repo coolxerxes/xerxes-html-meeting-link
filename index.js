@@ -1,10 +1,10 @@
 const express = require('express')
 const path = require('path')
 const fileUpload = require('express-fileupload');
-const usersRepository = require('./models/users.repository');
-const categoriesRepository = require('./models/categories.repository');
-const eventsRepository = require('./models/events.repository');
-const itemsRepository = require('./models/items.repository');
+// const usersRepository = require('./models/users.repository');
+// const categoriesRepository = require('./models/categories.repository');
+// const eventsRepository = require('./models/events.repository');
+// const itemsRepository = require('./models/items.repository');
 
 const PORT = process.env.PORT || 5001
 const router = express.Router();
