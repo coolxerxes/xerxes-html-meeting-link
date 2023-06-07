@@ -12,8 +12,9 @@ express()
   .get('/login', (req, res) => res.render('pages/login'))
   .get('/hostpost', (req, res) => res.render('pages/hostpost'))
   .get('/register', (req, res) => res.render('pages/registration-page'))
-  .get('/family', (req, res) => res.render('family'))
-  .get('/detail', (req, res) => res.render('detail'))
+  .get('/family', (req, res) => res.render('pages/family'))
+  .get('/detail', (req, res) => res.render('pages/detail'))
+  .get('/catagorypost', (req, res) => res.render('pages/catagorypost'))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
 
