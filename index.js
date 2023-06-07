@@ -1,6 +1,6 @@
 const express = require('express')
 const path = require('path')
-// const usersRepository = require('./models/users.repository');
+const usersRepository = require('./models/users.repository');
 
 const PORT = process.env.PORT || 5001
 
