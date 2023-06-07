@@ -92,6 +92,7 @@
             <li><a href="">Meetinglink.site</a></li>
           </ul>
           <li><a class="logout" href="/catagorypost"><button class="h">C</button></a></li>
+          <li><a class="logout" onclick="getLocation()"><button class="h">G</button></a></li>
           <li><a class="logout" href="/family"><button class="family">Family Fun</button></a></li>
 
           </ul>
@@ -132,8 +133,6 @@
           }
         </style>
 
-
-
   <body>
 
     <div id="container">
@@ -141,148 +140,93 @@
     </div>
 
     <script>
-      window.categories = [];
-
+      widnow.categories = [];
       const test = location.search.slice(1).split('=');
 
       if (test.length === 2 && test[1].length != 0) {
         window.categories = test[1].split(',').map(_item => decodeURI(_item));
       }
 
-      function initMap() {
+      function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+          alert('Geolocation is not supported by this browser.')
+        }
+      }
 
+      function showPosition(position) {
+        //x.innerHTML = "Latitude: " + position.coords.latitude +
+        //  "<br>Longitude: " + position.coords.longitude;
+
+        window.map.setCenter({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        })
+      }
+
+      function initMap() {
         let mapOptions = {
           center: { lat: 26.60775105325326, lng: -81.94498671487925 },
           zoom: 10,
           mapId: 'b4762a932ac83060',
         }
 
-        let map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        window.map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
         let infoWindow = new google.maps.InfoWindow();
 
-        window.locations = [
-          // [
-          //   { lat: 28.032358, lng: -82.45255 },
-          //   JSON.parse(
-          //     JSON.stringify('"80s Dance Party w/ FAME (The Ultimate Bowie Tribute) in Tampa"')).substring(1, JSON.parse(JSON.stringify('"80s Dance Party w/ FAME (The Ultimate Bowie Tribute) in Tampa"')).length - 1),
-          //   {
-          //     "Id": 703,
-          //     "Address": "810 E Skagway Ave Tampa, FL 33604",
-          //     "Phone Number": "",
-          //     "Hours of Operation": "Date and time Starts on Friday, May 12 &#xB7; 7pm EDT",
-          //     "Website": "",
-          //     "Description": "$15.00 Ages 18&#x2B; Communion After Dark 80s Dance Party w/ FAME (The Ultimate Bowie Tribute) in Tampa at New World Music Hall  4 hours 30 minutes"
-          //   },
-          //   "ALL EVENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-          // ],
-          // [{ lat: 28.032446, lng: -82.45246 }, JSON.parse(JSON.stringify('"Acid Mothers Temple, ST37, and More in Tampa"')).substring(1, JSON.parse(JSON.stringify('"Acid Mothers Temple, ST37, and More in Tampa"')).length - 1), { "Id": 705, "Address": "810 E Skagway Ave Tampa, FL 33604", "Phone Number": "", "Hours of Operation": "Date and time Starts on Thursday, May 25 &#xB7; 7pm EDT", "Website": "", "Description": "$17.00 4 hours 30 minutes" }, "ALL EVENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!"],
-          // [{ lat: 26.735872, lng: -82.05577 }, JSON.parse(JSON.stringify('"Advanced Beekeeping | 1-day Hands-On Workshop"')).substring(1, JSON.parse(JSON.stringify('"Advanced Beekeeping | 1-day Hands-On Workshop"')).length - 1), { "Id": 362, "Address": " 4160 Old Burnt Store Rd Cape Coral, FL 33993", "Phone Number": "", "Hours of Operation": "", "Website": "https://allevents.in/cape%20coral/advanced-beekeeping-%7C-1-day-hands-on-workshop/10000472593629267", "Description": "Saturday, June 10 &#xB7; 9am - 4pm EDT !!!!!!!!!!!!!!!!!!!!!!!!!!   $99.97" }, "ALL EVENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!"],
-          // [{ lat: 28.050236, lng: -82.42664 }, JSON.parse(JSON.stringify('"AFRO EXTRAVAGANZA"')).substring(1, JSON.parse(JSON.stringify('"AFRO EXTRAVAGANZA"')).length - 1), { "Id": 704, "Address": "11154 North 30th Street Tampa, FL 33612", "Phone Number": "", "Hours of Operation": "Date and time May 13 &#xB7; 10pm - May 15 &#xB7; 3am EDT", "Website": "", "Description": "$0 &#x2013; $300 Afrobeats In Town&#x201D; is back with another epic night. !! AFRO EXTRAVAGANZA!! Saturday May 13 At: Dunn&#x2019;s River Caf&#xE9; 11154 N 30th St, Tampa, FL 33612. Come enjoy the best of Afro beat, Amapiano, Soukouss, Kompa reggae , Soca and more &#x2026;. spined by the best Djs in town. Ladies free before midnight with RSVP. Reserve your ticket at:  For VIP, PLEASE CALL OR TEXT TO RESERVE YOUR SECTION (813) 451-0393 or 720 648 8033." }, "ALL EVENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!"],
-          // [{ lat: 26.15111, lng: -81.7939 }, JSON.parse(JSON.stringify('"America\u0027s Got Talent TOP 14 Kadan \u0026 Brooklyn Rockett MAGIC \u0026 COMEDY"')).substring(1, JSON.parse(JSON.stringify('"America\u0027s Got Talent TOP 14 Kadan \u0026 Brooklyn Rockett MAGIC \u0026 COMEDY"')).length - 1), { "Id": 355, "Address": "301 11th Street North Naples, FL 34102", "Phone Number": "", "Hours of Operation": "Date and time Saturday, May 6 &#xB7; 7:30 - 9pm EDT ", "Website": "https://www.groupon.com/deals/goldstar-america-s-got-talent-top-14-kadan-brooklyn-rockett-magic-comedy-1", "Description": "$31.55" }, "ALL EVENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!"],
-          // [{ lat: 26.654638, lng: -81.94069 }, JSON.parse(JSON.stringify('"Barbers with Vision"')).substring(1, JSON.parse(JSON.stringify('"Barbers with Vision"')).length - 1), { "Id": 376, "Address": "103 Del Prado Boulevard North Cape Coral, FL 33909", "Phone Number": "", "Hours of Operation": "Starts on Monday, May 1 &#xB7; 6pm EDT", "Website": "https://www.google.com/search?q=Barbers&#x2B;with&#x2B;Vision&#x2B;103&#x2B;Del&#x2B;Prado&#x2B;Boulevard&#x2B;North&#x2B;Cape&#x2B;Coral%2C&#x2B;FL&#x2B;33909&amp;rlz=1C1CHBF_enUS992US992&amp;sxsrf=APwXEdeZP7CCLiLP28HFk9OiAP3mptTTlA%3A1682094826268&amp;ei=6rpCZO_yD4SZwbkP5rSlsA4&amp;ved=0ahUKEwjvj-TEs7v-AhWETDABHWZaCeYQ4dUDCBA&amp;oq=Barbers&#x2B;with&#x2B;Vision&#x2B;103&#x2B;Del&#x2B;Prado&#x2B;Boulevard&#x2B;North&#x2B;Cape&#x2B;Coral%2C&#x2B;FL&#x2B;33909&amp;gs_lcp=Cgxnd3Mtd2l6LXNlcnAQDEoECEEYAFAAWABgAGgAcAB4AIABAIgBAJIBAJgBAKABAQ&amp;sclient=gws-wiz-serp", "Description": "$99.99" }, "ALL EVENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!"],
-          // [{ lat: 26.548178, lng: -81.98132 }, JSON.parse(JSON.stringify('"Basics of Florida Friendly Gardening 2023"')).substring(1, JSON.parse(JSON.stringify('"Basics of Florida Friendly Gardening 2023"')).length - 1), { "Id": 369, "Address": " 5505 Rose Garden Rd. Cape Coral", "Phone Number": "", "Hours of Operation": "", "Website": "", "Description": "Friday, May 5 &#xB7; 1 - 3pm EDT   !!!!!!!!!!! FREE !!!!!!!! " }, "ALL EVENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!"],
-          // [{ lat: 26.377329, lng: -81.80853 }, JSON.parse(JSON.stringify('"Beach Clean Up"')).substring(1, JSON.parse(JSON.stringify('"Beach Clean Up"')).length - 1), { "Id": 648, "Address": " 24850 S Tamiami Trail, Bonita Springs, FL 34134", "Phone Number": "", "Hours of Operation": "every Monday 6pm", "Website": "", "Description": "Meet up at the kava bar 6pm every Monday" }, "ALL EVENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!"],
-          // [{ lat: 27.769014, lng: -82.6626 }, JSON.parse(JSON.stringify('"Black Light Silent Disco!"')).substring(1, JSON.parse(JSON.stringify('"Black Light Silent Disco!"')).length - 1), { "Id": 702, "Address": "222 22nd Street South Saint Petersburg, FL 33712", "Phone Number": "", "Hours of Operation": "Date and time Friday, May 5 &#xB7; 8 - 11pm EDT", "Website": "", "Description": "$10 &#x2013; $15 A $10 advance ticket gets you your own headset for the night, plus a free drink to get the party started. Tickets are $15 after that and at the door, as supplies last. Click the ticket link to get yours now!" }, "ALL EVENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!"],
-          // [{ lat: 26.348085, lng: -81.786285 }, JSON.parse(JSON.stringify('"Bonita Springs Skate Park"')).substring(1, JSON.parse(JSON.stringify('"Bonita Springs Skate Park"')).length - 1), { "Id": 434, "Address": "26740 Pine Ave, Bonita Springs, FL 34135", "Phone Number": "", "Hours of Operation": "", "Website": "", "Description": "Phone Number:&#x2B;12399922556 Tuesday 7&#x202F;AM&#x2013;10&#x202F;PM  Wednesday 7&#x202F;AM&#x2013;10&#x202F;PM  Thursday 7&#x202F;AM&#x2013;10&#x202F;PM  Friday 7&#x202F;AM&#x2013;10&#x202F;PM  Saturday 7&#x202F;AM&#x2013;10&#x202F;PM  Sunday 7&#x202F;AM&#x2013;10&#x202F;PM  Monday 7&#x202F;AM&#x2013;10&#x202F;PM" }, "Skate Parks"],
-          // [{ lat: 26.60335, lng: -81.97509 }, JSON.parse(JSON.stringify('"Cape Coral Blood Drive"')).substring(1, JSON.parse(JSON.stringify('"Cape Coral Blood Drive"')).length - 1), { "Id": 378, "Address": " 2612 Santa Barbara Boulevard #Suite 9 Cape Coral, FL 33914", "Phone Number": "", "Hours of Operation": "", "Website": "", "Description": "Saturday, April 29 &#xB7; 10am - 3pm EDT" }, "ALL EVENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!"],
-          // [{ lat: 27.49969, lng: -82.57481 }, JSON.parse(JSON.stringify('"Cinco de Mayo Parking Lot Party at Felipe\u0027s"')).substring(1, JSON.parse(JSON.stringify('"Cinco de Mayo Parking Lot Party at Felipe\u0027s"')).length - 1), { "Id": 351, "Address": "St. Pete, &amp; Bradenton", "Phone Number": "", "Hours of Operation": "Date and time Friday, May 4 &#xB7; 8am - 5:30pm EDT ", "Website": "https://thehappythriftershopper.com/", "Description": "$69  Sharing the bus with our Bradenton Patrons we will pick up in both St. Pete and Bradenton for a Bradenton Bus Tour" }, "ALL EVENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!"],
-          // [{ lat: 27.49631, lng: -81.441025 }, JSON.parse(JSON.stringify('"Cruel Summer: A Taylor Swift Inspired Dance Party in Sebring"')).substring(1, JSON.parse(JSON.stringify('"Cruel Summer: A Taylor Swift Inspired Dance Party in Sebring"')).length - 1), { "Id": 350, "Address": "The Coffee Vault 200 Circle Park Dr Sebring, FL 33870", "Phone Number": "", "Hours of Operation": "", "Website": "", "Description": "Date and time Starts on Friday, May 19 &#xB7; 7pm EDT !!!!!!!!!!!!!! General Admission  1  $15.00" }, "ALL EVENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!"],
-          // [{ lat: 28.083391, lng: -82.45194 }, JSON.parse(JSON.stringify('"DARK FUNERAL"')).substring(1, JSON.parse(JSON.stringify('"DARK FUNERAL"')).length - 1), { "Id": 700, "Address": "14802 N. Nebraska Avenue Tampa, FL 33613", "Phone Number": "", "Hours of Operation": "Date and time Starts on Friday, May 19 &#xB7; 6pm EDT", "Website": "", "Description": "$25 UNDER 18 WITH PARENT OR LEGAL GUARDIAN Endoxa Booking &amp; The Orpheum Presents: The Decibel Magazine Tour 2023 comes to The Orpheum in Tampa Fri.May 19th! Feat. Dark Funeral - Cattle Decapitation &amp; more!" }, "ALL EVENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!"],
-          // [{ lat: 27.960814, lng: -82.44063 }, JSON.parse(JSON.stringify('"Deeper, Foyer Red, and More in Tampa"')).substring(1, JSON.parse(JSON.stringify('"Deeper, Foyer Red, and More in Tampa"')).length - 1), { "Id": 706, "Address": "1812 17th St. N Tampa, FL 33605", "Phone Number": "", "Hours of Operation": "Date and time Starts on Tuesday, May 30 &#xB7; 7pm EDT", "Website": "", "Description": "$13.00" }, "ALL EVENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!"],
-          // [{ lat: 26.53911, lng: -81.90291 }, JSON.parse(JSON.stringify('"De\u0027Vondre Campbell Free Football Camp 2023"')).substring(1, JSON.parse(JSON.stringify('"De\u0027Vondre Campbell Free Football Camp 2023"')).length - 1), { "Id": 366, "Address": "Cypress Lake High School 6750 Panther Lane Fort Myers, FL 33919", "Phone Number": "", "Hours of Operation": "", "Website": "", "Description": "Saturday, April 29 &#xB7; 10am - 1pm EDT !!!!!!!!!!!!!!!!!!!!!!!!! FREE" }, "ALL EVENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!"],
-          // [{ lat: 26.644571, lng: -81.977104 }, JSON.parse(JSON.stringify('"Eagle Skate Park"')).substring(1, JSON.parse(JSON.stringify('"Eagle Skate Park"')).length - 1), { "Id": 425, "Address": "315 SW 2nd Ave, Cape Coral, FL 33991", "Phone Number": "", "Hours of Operation": "", "Website": "", "Description": "Phone Number:&#x2B;12392423950 Tuesday 3&#x2013;8:45&#x202F;PM  Wednesday 3&#x2013;8:45&#x202F;PM  Thursday 3&#x2013;8:45&#x202F;PM  Friday 3&#x2013;8:45&#x202F;PM  Saturday 3&#x2013;8:45&#x202F;PM  Sunday 3&#x2013;6:45&#x202F;PM  Monday 3&#x2013;8:45&#x202F;PM" }, "Skate Parks"],
-          // [{ lat: 26.106203, lng: -81.76427 }, JSON.parse(JSON.stringify('"East Naples Community Park"')).substring(1, JSON.parse(JSON.stringify('"East Naples Community Park"')).length - 1), { "Id": 435, "Address": "3500 Thomasson Dr, Naples, FL 34112", "Phone Number": "", "Hours of Operation": "", "Website": "", "Description": "Phone Number:&#x2B;12392524414 Tuesday 9&#x202F;AM&#x2013;9&#x202F;PM  Wednesday 9&#x202F;AM&#x2013;9&#x202F;PM  Thursday 9&#x202F;AM&#x2013;9&#x202F;PM  Friday 9&#x202F;AM&#x2013;9&#x202F;PM  Saturday 9&#x202F;AM&#x2013;5&#x202F;PM  Sunday 9&#x202F;AM&#x2013;5&#x202F;PM  Monday 9&#x202F;AM&#x2013;9&#x202F;PM" }, "Skate Parks"],
-          // [{ lat: 26.697817, lng: -81.72356 }, JSON.parse(JSON.stringify('"Finish Line Friends Resale Bus Tour Thursday May 25th North Naples/Bonita"')).substring(1, JSON.parse(JSON.stringify('"Finish Line Friends Resale Bus Tour Thursday May 25th North Naples/Bonita"')).length - 1), { "Id": 363, "Address": "14070 Portico Blvd Clubhouse Fort Myers, FL 33905", "Phone Number": "", "Hours of Operation": "Thursday, May 25 &#xB7; 8:30am - 5:30pm EDT", "Website": "https://thehappythriftershopper.com", "Description": "$69.00" }, "ALL EVENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!"],
-          // [{ lat: 26.16802, lng: -81.79221 }, JSON.parse(JSON.stringify('"Fleischmann Edge Skate Park (separate skate \u0026 bike days - call for details)"')).substring(1, JSON.parse(JSON.stringify('"Fleischmann Edge Skate Park (separate skate \u0026 bike days - call for details)"')).length - 1), { "Id": 427, "Address": "1600 Fleischmann Blvd, Naples, FL 34102", "Phone Number": "", "Hours of Operation": "", "Website": "", "Description": "Phone Number:&#x2B;12392133020 Tuesday 10&#x202F;AM&#x2013;9&#x202F;PM  Wednesday 10&#x202F;AM&#x2013;9&#x202F;PM  Thursday 10&#x202F;AM&#x2013;9&#x202F;PM  Friday 10&#x202F;AM&#x2013;9&#x202F;PM  Saturday 9&#x202F;AM&#x2013;3&#x202F;PM  Sunday 9&#x202F;AM&#x2013;3&#x202F;PM  Monday 10&#x202F;AM&#x2013;9&#x202F;PM" }, "Skate Parks"],
-          // [{ lat: 27.960766, lng: -82.44372 }, JSON.parse(JSON.stringify('"Haya Lounge Latin Sunday"')).substring(1, JSON.parse(JSON.stringify('"Haya Lounge Latin Sunday"')).length - 1), { "Id": 697, "Address": "1412 East 7th Avenue Tampa, FL 33605", "Phone Number": "", "Hours of Operation": "Date and time Sunday, May 14 &#xB7; 3 - 8pm EDT", "Website": "", "Description": "$12 &#x2013; $150  Hotel Haya presents Haya Lounge Latin Sunday from 3PM - 8PM! We are in the ballroom for this special Mother&#x27;s Day edition and will have a special gift for the mom&#x27;s and mother figures while supplies last!" }, "ALL EVENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!"],
-          // [{ lat: 27.9406, lng: -82.45498 }, JSON.parse(JSON.stringify('"I CAN DO IT ~ TAMPA, FLORIDA ~ at the Tampa Covention Center"')).substring(1, JSON.parse(JSON.stringify('"I CAN DO IT ~ TAMPA, FLORIDA ~ at the Tampa Covention Center"')).length - 1), { "Id": 625, "Address": " 333 South Franklin Street Tampa, FL 33602", "Phone Number": "", "Hours of Operation": "Date and time May 19 &#xB7; 7pm - May 21 &#xB7; 5pm EDT", "Website": "", "Description": "$75 &#x2013; $399" }, "ALL EVENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!"],
-          // [{ lat: 26.422909, lng: -81.41923 }, JSON.parse(JSON.stringify('"Immokalee Skatepark"')).substring(1, JSON.parse(JSON.stringify('"Immokalee Skatepark"')).length - 1), { "Id": 436, "Address": "321 N 1st St, Immokalee, FL 34142", "Phone Number": "", "Hours of Operation": "", "Website": "", "Description": "" }, "Skate Parks"],
-          // [{ lat: 26.551376, lng: -81.88739 }, JSON.parse(JSON.stringify('"John Crist @ Barbara B. Mann Performing Arts Hall at FSW"')).substring(1, JSON.parse(JSON.stringify('"John Crist @ Barbara B. Mann Performing Arts Hall at FSW"')).length - 1), { "Id": 523, "Address": "13350 FSW Pkwy, Fort Myers, FL 33919", "Phone Number": "&#x2B;12394814849", "Hours of Operation": "Sunday, May 7 Event Starts 7:00PM", "Website": "https://www.bbmannpah.com/events/detail/john-crist", "Description": "Ticket Prices $149.75*, $49.75*, $39.75*, $29.75*" }, "ALL EVENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!"],
-          // [{ lat: 26.64515, lng: -81.87272 }, JSON.parse(JSON.stringify('"John Waite presented by Luminary Hotel \u0026 Co."')).substring(1, JSON.parse(JSON.stringify('"John Waite presented by Luminary Hotel \u0026 Co."')).length - 1), { "Id": 347, "Address": "2101 Edwards Drive Fort Myers, FL 33901", "Phone Number": "", "Hours of Operation": "Date and time Friday, April 28 &#xB7; 7 - 11pm EDT ", "Website": "https://caloosasoundamp.com/event/john-waite-presented-by-luminary-hotel-co/", "Description": "$20 &#x2013; $125 Get tickets" }, "ALL EVENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!"],
-          // [{ lat: 26.587711, lng: -81.88525 }, JSON.parse(JSON.stringify('"KKIDS Spectacular Soiree - The First Annual Giving Gala"')).substring(1, JSON.parse(JSON.stringify('"KKIDS Spectacular Soiree - The First Annual Giving Gala"')).length - 1), { "Id": 368, "Address": " 5632 Sunrise Drive Fort Myers, FL 33919", "Phone Number": "", "Hours of Operation": "", "Website": "", "Description": "Friday, April 28 &#xB7; 6 - 10pm EDT !!!!!!!!!!!!!!!!! $95 &#x2013; $1,250" }, "ALL EVENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!"],
-          // [{ lat: 27.423315, lng: -82.434784 }, JSON.parse(JSON.stringify('"Michael P. Fencil Annual Golf Tournament"')).substring(1, JSON.parse(JSON.stringify('"Michael P. Fencil Annual Golf Tournament"')).length - 1), { "Id": 359, "Address": "The River Club 6600 River Club Boulevard Lakewood Ranch, FL 34202", "Phone Number": "", "Hours of Operation": "Starts on Saturday, May 13 &#xB7; 8:30am EDT", "Website": "https://www.google.com/search?q=Michael&#x2B;P.&#x2B;Fencil&#x2B;Annual&#x2B;Golf&#x2B;Tournament&amp;rlz=1C1CHBF_enUS992US992&amp;sxsrf=APwXEddUGptQm1Vhp9Nh9KfIm-o1CNydmQ:1682097060243&amp;ei=pMNCZNGuDpHhxgHAyKfgBg&amp;oq=Michael&#x2B;P.&#x2B;Fencil&#x2B;Annual&#x2B;Golf&#x2B;Tournament&amp;gs_lcp=Cgxnd3Mtd2l6LXNlcnAQDDIFCCEQoAEyBQghEKABMgUIIRCrAjIFCCEQqwI6BwgjEOoCECc6DQgAEI8BEOoCELQCGAE6DQguEI8BEOoCELQCGAFKBAhBGABQoAxYoAxgwRhoAXAAeACAAaABiAGgAZIBAzAuMZgBAKABAaABArABFMABAdoBBggBEAEYCg&amp;sclient=gws-wiz-serp&amp;ibp=htl;events&amp;rciv=evn&amp;sa=X&amp;ved=2ahUKEwji4ofCvLv-AhVCTDABHTVRC70Q5bwDegQIEBAB#fpstate=tldetail&amp;htidocid=L2F1dGhvcml0eS9ob3Jpem9uL2NsdXN0ZXJlZF9ldmVudC8yMDIzLTA1LTEzfDEyNzc2MzI4NTAzNDQ5MjI1MzQw&amp;htivrt=events&amp;mid=/g/11twv0r8m2", "Description": "$100 &#x2013; $1,000" }, "ALL EVENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!"],
-          // [{ lat: 26.642998, lng: -81.87032 }, JSON.parse(JSON.stringify('"Mother\u2019s Day Floral Design Class"')).substring(1, JSON.parse(JSON.stringify('"Mother\u2019s Day Floral Design Class"')).length - 1), { "Id": 361, "Address": "1544 Broadway Fort Myers, FL 33901", "Phone Number": "", "Hours of Operation": "Wednesday, May 10 &#xB7; 6 - 7pm EDT", "Website": "", "Description": "$60.00" }, "ALL EVENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!"],
-          // [{ lat: 26.441032, lng: -81.77925 }, JSON.parse(JSON.stringify('"Old Dominion: No Bad Vibes Tour"')).substring(1, JSON.parse(JSON.stringify('"Old Dominion: No Bad Vibes Tour"')).length - 1), { "Id": 525, "Address": "11000 Everblades Parkway, Estero, FL 33928", "Phone Number": "", "Hours of Operation": "Sat, May 6, 7:30&#x2009;&#x2013;&#x2009;11:30&#x202F;PM", "Website": "https://app.discotech.me/events/37335077-old-dominion-no-bad-vibes-tour-at-hertz-arena", "Description": "$45 - $107" }, "ALL EVENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!"],
-          // [{ lat: 26.645445, lng: -81.86858 }, JSON.parse(JSON.stringify('"OTP LIVE | The Live Music Experience"')).substring(1, JSON.parse(JSON.stringify('"OTP LIVE | The Live Music Experience"')).length - 1), { "Id": 370, "Address": "2301 First Street Fort Myers, FL 33901", "Phone Number": "", "Hours of Operation": "May 10 &#xB7; 8pm - May 11 &#xB7; 12am EDT", "Website": "https://www.239area.com/florida/fort-myers/events/626563/otp-live~the-live-music-experience.htm", "Description": "$5 &#x2013; $15" }, "ALL EVENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!"],
-          // [{ lat: 26.560999, lng: -81.955956 }, JSON.parse(JSON.stringify('"Paint and Sip at Botanical Brewing"')).substring(1, JSON.parse(JSON.stringify('"Paint and Sip at Botanical Brewing"')).length - 1), { "Id": 353, "Address": "839 Miramar St, Cape Coral, FL 33904", "Phone Number": "", "Hours of Operation": "", "Website": "", "Description": "Date and time Sunday, April 30 &#xB7; 3:30 - 5:30pm EDT !!!!!!!!!!!!!!!!!     $25.00" }, "ALL EVENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!"],
-          // [{ lat: 26.563309, lng: -81.98852 }, JSON.parse(JSON.stringify('"Relaxing Sound Bath with Crystal Singing Bowls"')).substring(1, JSON.parse(JSON.stringify('"Relaxing Sound Bath with Crystal Singing Bowls"')).length - 1), { "Id": 375, "Address": "627 Cape Coral Parkway West Suite 202 Cape Coral, FL 33914", "Phone Number": "", "Hours of Operation": "Thursday, May 4 &#xB7; 6:30 - 7:30pm EDT", "Website": "https://allevents.in/cape%20coral/relaxing-sound-bath-with-crystal-singing-bowls/10000611486110417", "Description": "$22" }, "ALL EVENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!"],
-          // [{ lat: 26.644262, lng: -81.86509 }, JSON.parse(JSON.stringify('"Ride Nature Mini Ramp"')).substring(1, JSON.parse(JSON.stringify('"Ride Nature Mini Ramp"')).length - 1), { "Id": 426, "Address": "2464 Second St, Fort Myers, FL 33901", "Phone Number": "", "Hours of Operation": "", "Website": "", "Description": "Phone Number:&#x2B;12392205857  Tuesday 9&#x202F;AM&#x2013;5&#x202F;PM  Wednesday 9&#x202F;AM&#x2013;5&#x202F;PM  Thursday 9&#x202F;AM&#x2013;5&#x202F;PM  Friday 9&#x202F;AM&#x2013;5&#x202F;PM  Saturday 9&#x202F;AM&#x2013;5&#x202F;PM  Sunday Closed  Monday Closed " }, "Skate Parks"],
-          // [{ lat: 26.44066, lng: -81.77882 }, JSON.parse(JSON.stringify('"SANTA FE KLAN "')).substring(1, JSON.parse(JSON.stringify('"SANTA FE KLAN "')).length - 1), { "Id": 524, "Address": "11000 Everblades Pkwy. 33928 Estero, FL, US", "Phone Number": "", "Hours of Operation": "Mon, Jul 3, 7:30&#x2009;&#x2013;&#x2009;11:30&#x202F;PM", "Website": "https://www.songkick.com/concerts/40951048-santa-fe-klan-at-hertz-arena", "Description": "Price: US $36.50 &#x2013; US $125.50" }, "ALL EVENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!"],
-          // [{ lat: 26.645264, lng: -81.86938 }, JSON.parse(JSON.stringify('"See monsters of the deep"')).substring(1, JSON.parse(JSON.stringify('"See monsters of the deep"')).length - 1), { "Id": 628, "Address": "2268 Bay St, Fort Myers, FL 33901", "Phone Number": "2393324488", "Hours of Operation": "Date: MAY 4-7 2023", "Website": "http://www.floridarep.org/", "Description": "For Tickets Call: 2393324488" }, "ALL EVENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!"],
-          // [{ lat: 28.083296, lng: -82.45169 }, JSON.parse(JSON.stringify('"Set It Off"')).substring(1, JSON.parse(JSON.stringify('"Set It Off"')).length - 1), { "Id": 698, "Address": "14802 N. Nebraska Avenue Tampa, FL 33613", "Phone Number": "", "Hours of Operation": "Date and time Starts on Wednesday, May 10 &#xB7; 5:30pm EDT", "Website": "", "Description": "3 hours UNDER 18 WITH PARENT OR LEGAL GUARDIAN   !!!!! With special guests !!!!!!!" }, "ALL EVENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!"],
-          // [{ lat: 27.9467, lng: -82.46001 }, JSON.parse(JSON.stringify('"SILENT PARTY TAMPA: \u0022TODAYS TRAP vs 2000\u0027S DIRTY SOUTH HITS\u0022"')).substring(1, JSON.parse(JSON.stringify('"SILENT PARTY TAMPA: \u0022TODAYS TRAP vs 2000\u0027S DIRTY SOUTH HITS\u0022"')).length - 1), { "Id": 699, "Address": "100 W. Kennedy Boulevard Tampa, FL 33602", "Phone Number": "", "Hours of Operation": "Date and time Starts on Friday, May 26 &#xB7; 9pm EDT", "Website": "", "Description": "$25 &#x2013; $45 WE GOT THE VIBES FOR YOU TO ALWAYS HAVE A GOOD TIME! A CURATED EXPERIENCE AND NOT JUST A PARTY, YOU DON&#x2019;T WANT TO MISS OUT! TAILORED TO OUR GUESTS FOR THE BEST MUSICAL IMMERSION" }, "ALL EVENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!"],
-          // [{ lat: 26.568098, lng: -81.94339 }, JSON.parse(JSON.stringify('"Sound healing"')).substring(1, JSON.parse(JSON.stringify('"Sound healing"')).length - 1), { "Id": 377, "Address": "4515 Del Prado Boulevard South #Suite 5 Cape Coral, FL 33904", "Phone Number": "", "Hours of Operation": "", "Website": "", "Description": "Sunday, April 23 &#xB7; 5:30 - 6:30pm EDT !!!!!!!!!!!!! $20.00" }, "ALL EVENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!"],
-          // [{ lat: 27.845066, lng: -82.7027 }, JSON.parse(JSON.stringify('"STICK FIGURE \u0022Wisdom Tour\u0022 w/ PEPPER \u0026 THE ELOVATERS - St Pete"')).substring(1, JSON.parse(JSON.stringify('"STICK FIGURE \u0022Wisdom Tour\u0022 w/ PEPPER \u0026 THE ELOVATERS - St Pete"')).length - 1), { "Id": 624, "Address": "5010 81st Ave N Pinellas Park, FL 33781", "Phone Number": "", "Hours of Operation": "Date and time Sunday, July 2 &#xB7; 5 - 10pm EDT. Doors at 5pm", "Website": "", "Description": "$44.50 &#x2013; $125" }, "ALL EVENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!"],
-          // [{ lat: 26.64366, lng: -81.869644 }, JSON.parse(JSON.stringify('"Studs of Steel Live | Ft. Myers FL"')).substring(1, JSON.parse(JSON.stringify('"Studs of Steel Live | Ft. Myers FL"')).length - 1), { "Id": 367, "Address": "1528 Hendry Street Fort Myers, FL 33901", "Phone Number": "", "Hours of Operation": "Saturday, April 29 &#xB7; 8 - 10pm EDT", "Website": "https://www.google.com/search?q=Studs&#x2B;of&#x2B;Steel&#x2B;Live&#x2B;%7C&#x2B;Ft.&#x2B;Myers&#x2B;FL&amp;rlz=1C1CHBF_enUS992US992&amp;oq=Studs&#x2B;of&#x2B;Steel&#x2B;Live&#x2B;%7C&#x2B;Ft.&#x2B;Myers&#x2B;FL&amp;aqs=chrome..69i57j33i10i160l2j33i299.65981j0j4&amp;sourceid=chrome&amp;ie=UTF-8&amp;ibp=htl;events&amp;rciv=evn&amp;sa=X&amp;ved=2ahUKEwjb-cKhuLv-AhW4QjABHafuAY0Q5bwDegQICxAB#fpstate=tldetail&amp;htidocid=L2F1dGhvcml0eS9ob3Jpem9uL2NsdXN0ZXJlZF9ldmVudC8yMDIzLTA0LTI5fDk3NjcwNTc3Mzk0OTg0NTc4Mzk%3D&amp;htivrt=events&amp;mid=/g/11k4yqf_tp&amp;sxsrf=APwXEde6r8UwTdhcxqn2NbaGInrVR_-pqw:1682096094500", "Description": "$30 &#x2013; $40" }, "ALL EVENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!"],
-          // [{ lat: 26.710379, lng: -81.89923 }, JSON.parse(JSON.stringify('"The Ends Skatepark"')).substring(1, JSON.parse(JSON.stringify('"The Ends Skatepark"')).length - 1), { "Id": 424, "Address": "2900 N Tamiami Trail, North Fort Myers, FL 33903", "Phone Number": "", "Hours of Operation": "", "Website": "", "Description": "Tuesday Closed  Wednesday 6&#x2013;9&#x202F;PM  Thursday Closed  Friday 6&#x2013;9&#x202F;PM  Saturday 6&#x2013;8&#x202F;PM  Sunday 6&#x2013;9&#x202F;PM  Monday 6&#x2013;9&#x202F;PM http://www.ridenature.org/theendsskatepark" }, "Skate Parks"],
-          // [{ lat: 26.594786, lng: -81.89069 }, JSON.parse(JSON.stringify('"The SWFL Wellness Fair"')).substring(1, JSON.parse(JSON.stringify('"The SWFL Wellness Fair"')).length - 1), { "Id": 364, "Address": "10091 McGregor Boulevard Fort Myers, FL 33919", "Phone Number": "", "Hours of Operation": "", "Website": "https://www.swflwellnessfair.com/", "Description": "Sunday, April 23 &#xB7; 9am - 2pm EDT !!!!!!!!!!!!!!!!!!!!! FREE" }, "ALL EVENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!"],
-          // [{ lat: 26.551445, lng: -81.76097 }, JSON.parse(JSON.stringify('"Tim Tebow - 2023 Southwest Florida Community Prayer Breakfast"')).substring(1, JSON.parse(JSON.stringify('"Tim Tebow - 2023 Southwest Florida Community Prayer Breakfast"')).length - 1), { "Id": 365, "Address": "11500 Fenway South Drive Fort Myers, FL 33913", "Phone Number": "", "Hours of Operation": "", "Website": "https://demo.radiologywork.com", "Description": "Thursday, May 4 &#xB7; 6 - 9am EDT !!!!!!!!!!!!!!!!!!!!! FREE " }, "ALL EVENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!"],
-          // [{ lat: 26.509502, lng: -82.18985 }, JSON.parse(JSON.stringify('"\u0027Tween Waters Island Resort \u0026 Spa"')).substring(1, JSON.parse(JSON.stringify('"\u0027Tween Waters Island Resort \u0026 Spa"')).length - 1), { "Id": 540, "Address": "15951 Captiva Dr, Captiva, FL 33924", "Phone Number": " 239-472-5161", "Hours of Operation": "June 16, 2023 - June 18, 2023  4:00 PM to 1:00 AM ", "Website": "https://www.visitfortmyers.com/event/5th-annual-captivaville-songwriters-weekend/4744", "Description": "Join us for the 5th annual Captivaville Songwriters Weekend at &#x27;Tween Waters Island Resort &amp; Spa! It&#x27;s Captiva Island&#x2019;s largest music festival featuring local singer-songwriters for 72 hours of sun, fun, outstanding live music and the biggest party of the summer." }, "ALL EVENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!"],
-          // [{ lat: 26.59363, lng: -81.630196 }, JSON.parse(JSON.stringify('"Veterans Park"')).substring(1, JSON.parse(JSON.stringify('"Veterans Park"')).length - 1), { "Id": 433, "Address": "55 Homestead Rd S, Lehigh Acres, FL 33936", "Phone Number": "", "Hours of Operation": "", "Website": "", "Description": "Phone Number:&#x2B;12393691521  Tuesday 7&#x202F;AM&#x2013;9&#x202F;PM  Wednesday 7&#x202F;AM&#x2013;9&#x202F;PM  Thursday 7&#x202F;AM&#x2013;9&#x202F;PM  Friday 7&#x202F;AM&#x2013;7&#x202F;PM  Saturday 9&#x202F;AM&#x2013;5&#x202F;PM  Sunday 9&#x202F;AM&#x2013;5&#x202F;PM  Monday 7&#x202F;AM&#x2013;9&#x202F;PM" }, "Skate Parks"],
-          // [{ lat: 26.363195, lng: -81.80677 }, JSON.parse(JSON.stringify('"Vinyasa to Vino - With Gina! Italian Edition"')).substring(1, JSON.parse(JSON.stringify('"Vinyasa to Vino - With Gina! Italian Edition"')).length - 1), { "Id": 357, "Address": "25987 South Tamiami Trail Bonita Springs, FL 34134", "Phone Number": "", "Hours of Operation": "", "Website": "https://www.google.com/search?q=Vinyasa&#x2B;to&#x2B;Vino&#x2B;-&#x2B;With&#x2B;Gina!&#x2B;Italian&#x2B;Edition&amp;rlz=1C1CHBF_enUS992US992&amp;oq=Vinyasa&#x2B;to&#x2B;Vino&#x2B;-&#x2B;With&#x2B;Gina!&#x2B;Italian&#x2B;Edition&amp;aqs=chrome..69i57j69i60l2.2590j0j4&amp;sourceid=chrome&amp;ie=UTF-8", "Description": "Date and time Thursday, May 11 &#xB7; 6 - 8pm EDT !!!!!!!!!!!!!!!!!!!!!!!!!!! $35.00" }, "ALL EVENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!"],
-          // [{ lat: 26.553242, lng: -81.872505 }, JSON.parse(JSON.stringify('"WESOS Southwest Florida: Using Free Tech Tools for your Business"')).substring(1, JSON.parse(JSON.stringify('"WESOS Southwest Florida: Using Free Tech Tools for your Business"')).length - 1), { "Id": 371, "Address": "12984 South Cleveland Avenue Fort Myers, FL 33907", "Phone Number": "", "Hours of Operation": "", "Website": "", "Description": "Wednesday, April 26 &#xB7; 11:30am - 1:30pm EDT !!!!!!!!!!!!!! FREE" }, "ALL EVENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!"],
-          // [{ lat: 26.185198, lng: -81.70358 }, JSON.parse(JSON.stringify('"Wheels BMX Skate Park"')).substring(1, JSON.parse(JSON.stringify('"Wheels BMX Skate Park"')).length - 1), { "Id": 428, "Address": "4701 Golden Gate Pkwy, Naples, FL 34116", "Phone Number": "", "Hours of Operation": "", "Website": "", "Description": "Phone Number:&#x2B;12392524188 Tuesday 3&#x2013;8&#x202F;PM  Wednesday 3&#x2013;8&#x202F;PM  Thursday 3&#x2013;8&#x202F;PM  Friday 3&#x2013;8&#x202F;PM  Saturday 1&#x2013;8&#x202F;PM  Sunday 1&#x2013;6&#x202F;PM  Monday 3&#x2013;8&#x202F;PM" }, "Skate Parks"],
-          [{ lat: 27.767162, lng: -82.664185 }, JSON.parse(JSON.stringify('"ZULU, SOUL GLO, Famous Kid Brick, Big Baby Scumbag, ONLYONETWO, DEA \u0026 SAINT"')).substring(1, JSON.parse(JSON.stringify('"ZULU, SOUL GLO, Famous Kid Brick, Big Baby Scumbag, ONLYONETWO, DEA \u0026 SAINT"')).length - 1), { "Id": 630, "Address": " 400 23rd Street South St. Petersburg, FL 33712", "Phone Number": "", "Hours of Operation": "Date and time Starts on Sunday, April 30 &#xB7; 4pm EDT", "Website": "", "Description": "$20 &#x2013; $25" }, "ALL EVENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!"],
-        ];
+        fetch('/api/imageMap')
+          .then(info => info.json())
+          .then(imageMap => {
+            window.imageMap = imageMap;
 
-        debugger;
-        const buildings = JSON.parse(localStorage.getItem('host') || '[]')
-        locations.push(...buildings.map(building => {
-          return [
-            {
-              lat: building.latitude,
-              lng: building.longitude,
-            },
-            building.name,
-            {
-              "Id": building.id,
-              "Name": building.name,
-              "Address": building.address,
-              "Phone Number": building.phone,
-              "Hours of Operation": building.hours,
-              "Website": building.website,
-              "Description": building.description,
-            },
-            building.category || "ALL EVENTS !!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-          ]
-        }))
+            fetch(window.categories.length > 0 ? `/api/item/filter/${window.categories.join(',')}` : '/api/item')
+              .then((info) => info.json())
+              .then(data => {
+                document.getElementById('table').innerHTML = data
+                  .map((tr) => {
+                    const marker = new google.maps.Marker({
+                      icon: `https://firebasestorage.googleapis.com/v0/b/connect-cbff7.appspot.com/o/${window.imageMap[tr.eventId]}.png?alt=media&token=xerxes`,
+                      map: window.map,
+                      position: {
+                        lat: tr.latitude, lng: tr.longitude,
+                      },
+                      title: tr.name,
+                    });
+                    marker.addListener('click', () => { //(markers can only be keyboard focusable when they have click listeners)
+                      let contentString = `<dl class="row bg-white text-dark adaptive"><h2 id="heading${tr.id}">${marker.title}</h2>`;
+                      delete tr.eventId;
+                      for (const [key, value] of Object.entries(tr)) {
+                        if (key !== 'Id') {
+                          contentString += `<dt class="col-6">${key}</dt><dd class="col-6">`;
+                          if (key === 'Website') {
+                            contentString += `<a href="${value}">${value}</a>`;
+                          }
+                          else {
+                            contentString += value;
+                          }
+                          contentString += '</dd>';
+                        }
+                      }
+                      contentString += `</dl><a href="/detail?id=${tr.id}">Details</a>`;
+                      infoWindow.setContent(contentString);
+                      infoWindow.open(map, marker);
+                    });
 
-        const markers = locations
-          .filter(([_1, _2, _3, iconCategory]) => categories.length == 0 | categories.includes(iconCategory) == true)
-          .map(([position, title, modelObject, iconCategory], i) => {
-            const marker = new google.maps.Marker({
-              icon: (iconCategory === '' ? iconCategory : './assets/images/' + encodeURIComponent(iconCategory) + '.png'), //FIXME: ampersands in iconCategory (the category name) don't work, and encodeURIComponent() doesn't fix this problem
-              map,
-              position: position,
-              title: title,
-            });
-            marker.addListener('click', () => { //(markers can only be keyboard focusable when they have click listeners)
-              let contentString = `<dl class="row bg-white text-dark adaptive"><h2 id="heading${modelObject.Id}">${marker.title}</h2>`;
-              for (const [key, value] of Object.entries(modelObject)) {
-                if (key !== 'Id') {
-                  contentString += `<dt class="col-6">${key}</dt><dd class="col-6">`;
-                  if (key === 'Website') {
-                    contentString += `<a href="${value}">${value}</a>`;
-                  }
-                  else {
-                    contentString += value;
-                  }
-                  contentString += '</dd>';
-                }
-              }
-              contentString += `</dl><a href="hostpost.html?id=${modelObject.Id}">Details</a>`;
-              infoWindow.setContent(contentString);
-              infoWindow.open(map, marker);
-            });
-            return marker;
-          });
+                    return `<tr>
+                  <td>
+                   ${tr.name}
+                   </td><td>${tr.address}</td><td>${tr.phone}</td ><td>${tr.hours}</td><td>${tr.website}</td><td><a href="/hostpost?id=${tr.id}">Edit</a><a onclick="onDelete(${tr.id})">Delete</a></td></tr >`
+                  }).join('')
+              })
+          })
       }
 
     </script>
 
     <script
-      src="https:maps.googleapis.com/maps/api/js?key=AIzaSyBJFNO8DbbNEa82seuZX15PUoK2gShqdFs&map_ids=b4762a932ac83060&callback=initMap">
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJFNO8DbbNEa82seuZX15PUoK2gShqdFs&map_ids=b4762a932ac83060&callback=initMap">
       </script>
 
     <!-------------------------------PARENT--------------------------------------->
@@ -294,462 +238,21 @@
         height: 50px;
       }
     </style>
-    <div class="scroll">
-
-
-
-      <div class="parentlist"><button class='parent' id="parent1">Activities</div></button>
-
-      <div class="parentlist"><button class="parent" id="parent2">Events</div></button>
-
-      <div class="parentlist"><button class="parent" id="parent3">Local Artist</div></button>
-
-      <div class="parentlist"><button class="parent" id="parent4">Family Functions</button></div>
-
-      <div class="parentlist"><button class="parent" id="parent5">Team Functions</button></div>
-
-      <div class="parentlist"><button class="parent" id="parent6">Semi Pro Events</button></div>
-
-      <div class="parentlist"><button class="parent" id="parent7">Unusual Events</button></div>
-
-      <div class="parentlist"><button class="parent" id="parent8">Educational Lessons</button></div>
-
-      <div class="parentlist"><button class="parent" id="parent9">FREE Events</button></div>
-
-      <div class="parentlist"><button class="parent" id="parent10">Event Catering</button></div>
-
-      <div class="parentlist"><button class="parent" id="parent11">Local Post</button></div>
-
-
+    <div class="scroll" id="categories">
     </div>
-
-
-
-
-
-
-
-
 
     <!-----------------------------CHILD--1--LIST--------------------------------->
 
-    <ul id="child1">
+    <ul>
+      <div class="child" id="events">
 
-
-
-      <div class="child">
-        <div>
-          <label>
-            <input type="checkbox" name="list">
-            <span>Skate Parks</span>
-          </label>
-        </div>
-
-        <div>
-          <label>
-            <input type="checkbox" name="list">
-            <span>Kava Bars</span>
-          </label>
-        </div>
-
-        <div>
-          <label>
-            <input type="checkbox" name="list">
-            <span>Trails</span>
-          </label>
-        </div>
-        <div>
-          <label>
-            <input type="checkbox" name="">
-            <span>Parks</span>
-          </label>
-        </div>
-
-        <div>
-          <label>
-            <input type="checkbox" name="">
-            <span>Clubs</span>
-          </label>
-        </div>
-
-        <div>
-          <label>
-            <input type="checkbox" name="">
-            <span>Movies</span>
-          </label>
-        </div>
-        <div>
-          <label>
-            <input type="checkbox" name="">
-            <span>Ice Skating</span>
-          </label>
-        </div>
-
-        <div>
-          <label>
-            <input type="checkbox" name="">
-            <span>Boxing Gyms</span>
-          </label>
-        </div>
-
-        <div>
-          <label>
-            <input type="checkbox" name="">
-            <span>Basketball</span>
-          </label>
-        </div>
-        <div>
-          <label>
-            <input type="checkbox" name="">
-            <span>Tennis</span>
-          </label>
-        </div>
-
-        <div>
-          <label>
-            <input type="checkbox" name="">
-            <span>Gyms</span>
-          </label>
-        </div>
-
-        <div>
-          <label>
-            <input type="checkbox" name="">
-            <span>Skate Parks</span>
-          </label>
-        </div>
-        </label>
       </div>
     </ul>
-
-
-    <!----------------------------CHILD-LIST2------------------------------------------->
-
-
-    <ul id="child2">
-
-      <div class="child">
-        <div>
-          <label>
-            <input type="checkbox" name="">
-            <span>Yoga</span>
-          </label>
-        </div>
-
-        <div>
-          <label>
-            <input type="checkbox" name="">
-            <span>Art</span>
-          </label>
-        </div>
-
-        <div>
-          <label>
-            <input type="checkbox" name="">
-            <span>Dancing</span>
-          </label>
-        </div>
-        <div>
-          <label>
-            <input type="checkbox" name="">
-            <span>Music</span>
-          </label>
-        </div>
-
-        <div>
-          <label>
-            <input type="checkbox" name="">
-            <span>Educational</span>
-          </label>
-        </div>
-
-        <div>
-          <label>
-            <input type="checkbox" name="">
-            <span>Dating</span>
-          </label>
-        </div>
-        <div>
-          <label>
-            <input type="checkbox" name="">
-            <span>Comedy</span>
-          </label>
-        </div>
-
-        <div>
-          <label>
-            <input type="checkbox" name="">
-            <span>Magic</span>
-          </label>
-        </div>
-
-        <div>
-          <label>
-            <input type="checkbox" name="">
-            <span>Stage Show</span>
-          </label>
-        </div>
-        <div>
-          <label>
-            <input type="checkbox" name="">
-            <span>Unusual Events</span>
-          </label>
-        </div>
-
-        <div>
-          <label>
-            <input type="checkbox" name="">
-            <span>Kid</span>
-          </label>
-        </div>
-
-        <div>
-          <label>
-            <input type="checkbox" name="">
-            <span>Church</span>
-          </label>
-        </div>
-        </label>
-      </div>
-    </ul>
-
-
-
-    <!----------------------------------CHILD3-------------------------------------------->
-
-
-    <ul id="child3">
-
-      <div class="child">
-        <div>
-          <label>
-            <input type="checkbox" name="">
-            <span>Poetry</span>
-          </label>
-        </div>
-
-        <div>
-          <label>
-            <input type="checkbox" name="">
-            <span>Art</span>
-          </label>
-        </div>
-
-        <div>
-          <label>
-            <input type="checkbox" name="">
-            <span>Dancing</span>
-          </label>
-        </div>
-        <div>
-          <label>
-            <input type="checkbox" name="">
-            <span>Music</span>
-          </label>
-        </div>
-
-        <div>
-          <label>
-            <input type="checkbox" name="">
-            <span>Singing</span>
-          </label>
-        </div>
-
-        <div>
-          <label>
-            <input type="checkbox" name="">
-            <span>Shows</span>
-          </label>
-        </div>
-        <div>
-          <label>
-            <input type="checkbox" name="">
-            <span>Comedy</span>
-          </label>
-        </div>
-
-        <div>
-          <label>
-            <input type="checkbox" name="">
-            <span>Magic</span>
-          </label>
-        </div>
-
-        <div>
-          <label>
-            <input type="checkbox" name="">
-            <span>Stage Show</span>
-          </label>
-        </div>
-        <div>
-          <label>
-            <input type="checkbox" name="">
-            <span>Unusual Events</span>
-          </label>
-        </div>
-
-        <div>
-          <label>
-            <input type="checkbox" name="">
-            <span>Kid</span>
-          </label>
-        </div>
-
-        <div>
-          <label>
-            <input type="checkbox" name="">
-            <span>Church</span>
-          </label>
-        </div>
-        </label>
-      </div>
-    </ul>
-
-
-    </ul>
-
-
 
     <!------------------------------JS----Button----exc.....------------------------------>
 
     <script>
-
-      const template = `
-      <div>
-          <label>
-            <input type="checkbox" name="list">
-            <span>TITLE</span>
-          </label>
-        </div>
-      `
-
-      var elements = document.getElementsByClassName("parentlist");
-      for (var i = 0; i < elements.length; i++) {
-        elements[i].onclick = function () {
-
-          var el = elements[0];
-          while (el) {
-            if (el.tagName === 'DIV') {
-
-              el.classList.remove('bak');
-            }
-            el = el.nextSibling;
-          }
-
-          this.classList.add('bak');
-        };
-      }
-
-      const parent1 = document.getElementById('parent1');
-
-      const child1 = document.getElementById('child1');
-
-      child1.style.display = "none";
-
-      parent1.addEventListener("click",
-        (event) => {
-
-
-          if (child1.style.display == "none") {
-            child1.style.display = "block";
-
-            child2.style.display = "none";
-            child3.style.display = "none";
-            // child4.style.display = "none";
-            // child5.style.display = "none";
-            // child6.style.display = "none";
-            // child7.style.display = "none";
-            // child8.style.display = "none";
-            // child9.style.display = "none";
-            // child10.style.display = "none";
-
-
-          } else {
-            child1.style.display = "none";
-          }
-        })
-
-      const parent2 = document.getElementById('parent2');
-
-
-      const child2 = document.getElementById('child2');
-
-      child2.style.display = "none";
-
-      parent2.addEventListener("click",
-        (event) => {
-
-
-          if (child2.style.display == "none") {
-            child2.style.display = "block";
-
-
-            child1.style.display = "none";
-            child3.style.display = "none";
-            // child4.style.display = "none";
-            // child5.style.display = "none";
-            // child6.style.display = "none";
-            // child7.style.display = "none";
-            // child8.style.display = "none";
-            // child9.style.display = "none";
-            // child10.style.display = "none";
-
-          } else {
-            child2.style.display = "none";
-          }
-        })
-
-      const parent3 = document.getElementById('parent3');
-
-
-      const child3 = document.getElementById('child3');
-
-      // child3.style.display = "none";
-
-      parent3.addEventListener("click",
-        (event) => {
-
-
-          if (child3.style.display == "none") {
-            child3.style.display = "block";
-
-            child1.style.display = "none";
-            child2.style.display = "none";
-            // child4.style.display = "none";
-            // child5.style.display = "none";
-            // child6.style.display = "none";
-            // child7.style.display = "none";
-            // child8.style.display = "none";
-            // child9.style.display = "none";
-            // child10.style.display = "none";
-
-          } else {
-            child3.style.display = "none";
-          }
-        }
-      )
-
-      var events = ['Activities', 'Events', 'Local Artist', 'Family Functions', 'Team Functions', 'Semi Pro Events'];
-
-
-      events.forEach(function (_item, index) {
-        try {
-          const added = JSON.parse(localStorage.getItem(_item) || '[]');
-
-          var chldd = document.getElementById('child' + (index + 1)).getElementsByClassName('child')[0];
-
-          chldd.innerHTML = chldd.innerHTML + added
-            .map((_res) => {
-              return template.replace('TITLE', _res)
-            })
-            .join('')
-        } catch {
-
-        }
-      })
-
       function onDelete(id) {
-        debugger;
         const buildings = JSON.parse(localStorage.getItem('host') || '[]');
 
         const newBuildings = buildings.filter(_building => _building.id != id);
@@ -792,19 +295,13 @@
 
     <script>
 
-      document.getElementById('table').innerHTML = window.locations
-        .filter(([_1, _2, _3, iconCategory]) => categories.length == 0 | categories.includes(iconCategory) == true)
-        .map(([_, _1, tr, _2]) => {
-          return `<tr><td>${tr.Name || _1.slice(0, 15)} </td><td>${tr.Address}</td><td>${tr['Phone Number']}</td><td>${tr['Hours of Operation']}</td><td>${tr.Website}</td><td><a href="hostpost.html?id=${tr.Id}">Edit</a><a onclick="onDelete(${tr.Id})">Delete</a></td></tr>`
-        }).join('')
-
       function onSubmit() {
         const inputs = document.querySelectorAll('input[type=checkbox]');
 
         let categories = [];
         for (let i = 0; i < inputs.length; ++i) {
           if (inputs[i].checked == true) {
-            var category = inputs[i].parentNode.children.item(1).textContent;
+            var category = inputs[i].parentNode.parentElement.id;
             categories.push(category);
           }
         }
@@ -814,7 +311,50 @@
         location.href = `?filter=${categories.join(',')}`;
       }
 
-          </script>
+      const eventTemplate = `<div id="_ID_">
+          <label>
+            <input type="checkbox" name="list">
+            <span>_TITLE_</span>
+          </label>
+        </div>
+      `
+
+      function onEventClick(id) {
+        var elements = document.getElementsByClassName("parentlist");
+        for (var i = 0; i < elements.length; i++) {
+          elements[i].classList.remove('bak');
+        }
+
+        document.getElementById(id).classList.add('bak');
+
+        fetch(`/api/categories/${id}`)
+          .then(info => info.json())
+          .then(data => {
+            document.getElementById('events').innerHTML = data
+              .map(item => {
+                return eventTemplate.replace('_TITLE_', item.title).replace('_ID_', item.id)
+              })
+          })
+      }
+
+      window.onload = function () {
+
+        const categoryTemplate = '<div class="parentlist" id="_ID_"><button class="parent" onclick="onEventClick(\'_ID_\')">_TITLE_</div></button>';
+
+        fetch('/api/categories')
+          .then((info) => info.json())
+          .then(data => {
+            console.log(data);
+            document.getElementById('categories').innerHTML = data
+              .map((item) => {
+                return categoryTemplate.replace(/_ID_/g, item.id).replace('_TITLE_', item.title)
+              })
+              .join('');
+          })
+
+
+      }
+    </script>
 
   </body>
 

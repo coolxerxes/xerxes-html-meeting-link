@@ -2,7 +2,7 @@ const AbstractRepository = require("./abstract.repository");
 
 class UsersRepository extends AbstractRepository {
   constructor() {
-    super('users')
+    super('users1')
   }
 
   async login(email, type, password = '') {
@@ -90,6 +90,7 @@ class UsersRepository extends AbstractRepository {
       }
     }
   }
+
 }
 
-module.exports = UsersRepository;
+module.exports = new UsersRepository();

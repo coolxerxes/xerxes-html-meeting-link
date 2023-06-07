@@ -9,6 +9,7 @@
   <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-auth-compat.js"></script>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
   <script src="./config.js"></script>
 
 </head>
@@ -154,7 +155,7 @@
 
 
 
-        <button class="button3"><img class="img" src="/assets/images/facebook11.png"></button>
+        <button class="button3" type="button"><img class="img" onclick="registerWithFacebook()" src="/assets/images/facebook11.png"></button>
         <br><br>
 
 
@@ -303,6 +304,30 @@
     document.body.appendChild(form)
 
     form.submit();
+  }
+
+  function registerWithFacebook() {
+    FB.login(function (response) {
+      if (response.authResponse) {
+        console.log('Welcome!  Fetching your information.... ');
+        FB.api('/me', { fields: "name,email" }, function (response) {
+          console.log(response);
+          console.log('Good to see you, ' + response.name + '.');
+          register(response.name, response.email, 'FACEBOOK', '');
+        });
+      } else {
+        console.log('User cancelled login or did not fully authorize.');
+      }
+    }, { scope: 'public_profile,email' });
+  }
+
+  window.onload = function () {
+    FB.init({
+      appId: '1419405502157561',
+      status: true,
+      xfbml: true,
+      version: 'v2.7' // or v2.6, v2.5, v2.4, v2.3
+    });
   }
 </script>
 

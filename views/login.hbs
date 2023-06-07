@@ -12,10 +12,16 @@
   <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-auth-compat.js"></script>
   <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
 
 </head>
 
 <body>
+  <div id="fb-root"></div>
+  <script async defer crossorigin="anonymous"
+    src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v17.0&appId=1419405502157561&autoLogAppEvents=1"
+    nonce="NEW7fiNu"></script>
+
   <script>
 
     const db = firebase.firestore();
@@ -161,13 +167,16 @@
 
         <div></div>
         <div>
-          <button class="button3"><img class="img" src="./assets/images/facebook11.png"></button>
+          <button class="button3" type="button" onclick="loginWithFacebook()"><img class="img"
+              src="./assets/images/facebook11.png"></button>
           <br><br>
 
           <div onclick="signInWithGoogle()">
             <button class="button3" type="button"><img class='img' src="./assets/images/google4.png"></button>
             <br><br>
           </div>
+
+
 
           <h2>SIGN UP HERE</h2>
 
@@ -184,7 +193,7 @@
         <div>
 
 
-          <button class="signin" type="button" >
+          <button class="signin" type="button">
             <a class="submit" style=color:white onclick="signInWithEmail()">Sign in</a>
           </button><br>
 
@@ -242,7 +251,7 @@
     form.append('email', email);
     form.append('type', type);
     form.append('password', password)
-    
+
     http.send(form)
   }
 
@@ -278,7 +287,7 @@
 
     let params = {
       "client_id": "1061071120688-co4kulfm58r4dgnstitpgec0jm30fitb.apps.googleusercontent.com",
-      "redirect_uri": "http://localhost:3000/login",
+      "redirect_uri": "https://localhost:3000/login",
       "response_type": "token",
       "state": "pass-through-value",
       "include_granted_scopes": "true",
@@ -296,6 +305,30 @@
     document.body.appendChild(form)
 
     form.submit();
+  }
+
+  function loginWithFacebook() {
+    FB.login(function (response) {
+      if (response.authResponse) {
+        console.log('Welcome!  Fetching your information.... ');
+        FB.api('/me', { fields: "name,email" }, function (response) {
+          console.log(response);
+          console.log('Good to see you, ' + response.name + '.');
+          login(response.name, response.email, 'FACEBOOK', '');
+        });
+      } else {
+        console.log('User cancelled login or did not fully authorize.');
+      }
+    }, { scope: 'public_profile,email' });
+  }
+
+  window.onload = function () {
+    FB.init({
+      appId: '1419405502157561',
+      status: true,
+      xfbml: true,
+      version: 'v2.7' // or v2.6, v2.5, v2.4, v2.3
+    });
   }
 </script>
 </body>
