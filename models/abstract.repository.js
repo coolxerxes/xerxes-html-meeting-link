@@ -26,7 +26,7 @@ class AbstractRepository {
       .collection(collection)
 
     // this.bucket = this.app.storage().bucket('gs://connect-cbff7.appspot.com');
-    this.bucket = this.app.storage().bucket(process.env.BUCKET);
+    // this.bucket = this.app.storage().bucket(process.env.BUCKET);
   }
 }
 
