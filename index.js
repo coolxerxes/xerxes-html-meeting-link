@@ -1,6 +1,7 @@
 const express = require('express')
 const path = require('path')
 const fileUpload = require('express-fileupload');
+const fs = require('fs');
 // const usersRepository = require('./models/users.repository');
 // const categoriesRepository = require('./models/categories.repository');
 // const eventsRepository = require('./models/events.repository');
@@ -32,7 +33,9 @@ express()
   // .get('/detail', (req, res) => res.render('pages/detail'))
   // .get('/catagorypost', (req, res) => res.render('pages/catagorypost'))
   .use('/', (req, res) => {
-    res.status(200).json('200');
+    // res.set('Content-Type', 'text/html');
+    // res.sendFile(path.join(__dirname + '/views/index.hbs'));
+    res.send('<html>RED<h1>RRR</h1></html>')
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
