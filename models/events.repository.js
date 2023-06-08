@@ -41,7 +41,9 @@ class EventsRepository extends AbstractRepository {
   
       return imageMap;
     } catch {
-      return {}
+      return {
+        'ehll': 'red'
+      }
     }
   }
 
