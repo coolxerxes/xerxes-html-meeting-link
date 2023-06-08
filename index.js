@@ -11,6 +11,12 @@ const router = express.Router();
 
 // eventsRepository.addEvents('sdfsdf', 'sdfsdf', './public/images/Boxing Gyms.png');
 
+router.get('/imageMap', async function (req, res) {
+  const result = await eventsRepository.getEventImageMap();
+
+  res.status(200).json(result);
+})
+
 
 express()
   .use('/assets', express.static(path.join(__dirname, 'public')))
