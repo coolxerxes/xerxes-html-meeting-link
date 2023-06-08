@@ -35,7 +35,9 @@ express()
   .use('/', (req, res) => {
     // res.set('Content-Type', 'text/html');
     // res.sendFile(path.join(__dirname + '/views/index.hbs'));
-    res.send('<html>RED<h1>RRR</h1></html>')
+    const data = fs.readFileSync(path.join(__dirname, 'views', 'index.hbs'));
+    // res.send(data.toString()
+    res.send(data.toString())
   })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
