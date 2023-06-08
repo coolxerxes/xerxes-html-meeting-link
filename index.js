@@ -1,21 +1,21 @@
 const express = require('express')
 const path = require('path')
 const fileUpload = require('express-fileupload');
-const usersRepository = require('./models/users.repository');
-const categoriesRepository = require('./models/categories.repository');
-const eventsRepository = require('./models/events.repository');
-const itemsRepository = require('./models/items.repository');
+// const usersRepository = require('./models/users.repository');
+// const categoriesRepository = require('./models/categories.repository');
+// const eventsRepository = require('./models/events.repository');
+// const itemsRepository = require('./models/items.repository');
 
 const PORT = process.env.PORT || 5001
 const router = express.Router();
 
 // eventsRepository.addEvents('sdfsdf', 'sdfsdf', './public/images/Boxing Gyms.png');
 
-router.get('/imageMap', async function (req, res) {
-  const result = await eventsRepository.getEventImageMap();
+// router.get('/imageMap', async function (req, res) {
+//   const result = await eventsRepository.getEventImageMap();
 
-  res.status(200).json(result);
-})
+//   res.status(200).json(result);
+// })
 
 
 express()
