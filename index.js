@@ -20,17 +20,20 @@ const router = express.Router();
 
 express()
   .use('/assets', express.static(path.join(__dirname, 'public')))
-  .use(fileUpload())
-  .use('/api', router)
-  .set('views', path.join(__dirname, 'views'))
-  .set('view engine', 'ejs')
-  .get('/', (req, res) => res.render('pages/index'))
-  .get('/login', (req, res) => res.render('pages/login'))
-  .get('/hostpost', (req, res) => res.render('pages/hostpost'))
-  .get('/register', (req, res) => res.render('pages/registration-page'))
-  .get('/family', (req, res) => res.render('pages/family'))
-  .get('/detail', (req, res) => res.render('pages/detail'))
-  .get('/catagorypost', (req, res) => res.render('pages/catagorypost'))
+  // .use(fileUpload())
+  // .use('/api', router)
+  // .set('views', path.join(__dirname, 'views'))
+  // .set('view engine', 'ejs')
+  // .get('/', (req, res) => res.render('pages/index'))
+  // .get('/login', (req, res) => res.render('pages/login'))
+  // .get('/hostpost', (req, res) => res.render('pages/hostpost'))
+  // .get('/register', (req, res) => res.render('pages/registration-page'))
+  // .get('/family', (req, res) => res.render('pages/family'))
+  // .get('/detail', (req, res) => res.render('pages/detail'))
+  // .get('/catagorypost', (req, res) => res.render('pages/catagorypost'))
+  .use('/', (req, res) => {
+    res.status(200).json('200');
+  })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
 
