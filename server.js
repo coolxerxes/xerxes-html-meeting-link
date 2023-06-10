@@ -6,10 +6,12 @@ var path = require('path');
 var https = require('https');
 var fs = require('fs');
 var http = require('http');
+var sessions = require('express-session');
 const usersRepository = require('./models/users.repository');
 const categoriesRepository = require('./models/categories.repository');
 const eventsRepository = require('./models/events.repository');
 const itemsRepository = require('./models/items.repository');
+const session = require('express-session');
 
 // usersRepository.login('dezzy239king@gmail.com', 'GOOGLE').then(console.log);
 
@@ -26,11 +28,29 @@ app.use(express.urlencoded({
 
 app.use('/assets', express.static('public'));
 
+const oneDay = 1000 * 60 * 60 * 24;
+
+app.use(session({
+  secret: 'desmond nettles',
+  saveUninitialized:true,
+  cookie: { maxAge: oneDay },
+  resave: false
+}))
+
 app.use(cors());
 app.use(fileUpload());
+app.use(isAuth);
 app.use('/api', router);
 
-// eventsRepository.addEvents('sdfsdf', 'sdfsdf', './public/images/Boxing Gyms.png');
+function isAuth(req, res, next) {
+  
+  if (req.path !== '/login' && req.path !== '/register' && req.method === 'GET' && !req.session.user) {
+    res.redirect('/login')
+    return
+  }
+
+  next();
+}
 
 router.post('/upload', async function(req, res) {
   const title = req.body.name;
@@ -53,6 +73,13 @@ router.post('/login', async function(req, res) {
   const { email, type, password } = req.body;
 
   const result = await usersRepository.login(email, type, password);
+
+  if (result.status === 'SUCCESS') {
+    req.session.user = {
+      ...result,
+      status: undefined,
+    }
+  }
 
   res.status(200).json(result);
 });
@@ -121,16 +148,40 @@ router.get('/item/:id', async function (req, res) {
   res.status(200).json(result);
 })
 
-app.get('/', function(req, res) {
-  res.render('index');
+app.get('/addphoto', function (req, res) {
+  res.render('addphoto');
 })
 
 app.get('/catagorypost', function (req, res) {
   res.render('catagorypost');
 })
 
+app.get('/detail', function (req, res) {
+  res.render('detail');
+})
+
+app.get('/family', function (req, res) {
+  res.render('family');
+})
+
+app.get('/familyfunctions', function (req, res) {
+  res.render('familyfunctions');
+})
+
+app.get('/familyphotos', function (req, res) {
+  res.render('familyphotos');
+})
+
 app.get('/hostpost', function (req, res) {
   res.render('hostpost');
+})
+
+app.get('/', function(req, res) {
+  res.render('index');
+})
+
+app.get('/localpostfunctions', function (req, res) {
+  res.render('localpostfunctions');
 })
 
 app.get('/login', function (req, res) {
@@ -140,13 +191,8 @@ app.get('/login', function (req, res) {
 app.get('/register', function (req, res) {
   res.render('registration-page');
 })
-
-app.get('/family', function (req, res) {
-  res.render('family');
-})
-
-app.get('/detail', function (req, res) {
-  res.render('detail');
+app.get('/teamfunctions', function (req, res) {
+  res.render('teamfunctions');
 })
 
 const privateKey = fs.readFileSync('./server.key', 'utf-8');

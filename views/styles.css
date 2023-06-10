@@ -1,0 +1,140 @@
+body {
+  background-image: url('logo.jpg');
+  background-size: 1500px;
+}
+
+h1 {
+  font-size: 20px;
+  color: white;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(45deg, rgb(0, 0, 0), rgb(0, 0, 0));
+}
+
+.bak .parent {
+  background-color: darkblue;
+  color: rgb(1, 157, 1);
+
+}
+
+.parent {
+  overflow: hidden;
+  margin-top: px;
+}
+
+.parent {
+  background-color: rgb(0, 0, 0);
+  color: #02ff1c;
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+  border-radius: 6px;
+  border-color: rgb(0, 33, 150);
+  border-width: 4px;
+  box-shadow: 0 0 5px rgb(255, 255, 255);
+  border-radius: 10px;
+}
+
+.scroll {
+  min-height: 60px;
+  border: 1px solid rgb(0, 0, 0);
+  display: flex;
+  overflow-x: auto;
+
+}
+
+.parent::-webkid-scrollbar {
+  width: 0;
+}
+
+.scroll .item {
+  min-width: 138px;
+  height: 10px;
+  line-height: 10px;
+  text-align: center;
+  background-color: rgb(0, 0, 0);
+  margin-right: 2px;
+
+}
+
+.child {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  font-style: oblique;
+}
+
+.child div {
+  margin: 2px;
+}
+
+.child div label input[type="checkbox"] {
+  display: none;
+}
+
+.child div label span {
+  position: relative;
+  display: inline-block;
+  background: #dedfde;
+  padding: 15px 30px;
+  color: #000000;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 5);
+  border-radius: 30px;
+  font-size: 20px;
+  transition: 0.5s;
+  user-select: none;
+  overflow: hidden;
+  font-style: italic;
+  font: bold;
+}
+
+.child div label span::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: rrgb(255, 255, 255. 0, );
+}
+
+.child div label input[type="checkbox"] checked~span {
+  background: #ffffff;
+}
+
+.child
+
+/*div:nth-child(6n + 1)*/
+label input[type="checkbox"]:checked~span {
+  color: #00d215;
+  background: rgb(0, 33, 150);
+  ;
+  box-shadow: 0 2px 20px #e91e63 rgb(237, 237, 237);
+}
+
+.summit {
+  font-size: 28px;
+  background-color: rgb(0, 33, 150);
+  border-radius: 7px;
+  color: rgb(34, 255, 0);
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+h1 {
+  font-size: 3w;
+  margin: 15px 0;
+}

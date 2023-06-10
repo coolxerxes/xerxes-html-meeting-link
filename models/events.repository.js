@@ -9,15 +9,15 @@ class EventsRepository extends AbstractRepository {
   async addEvents(categoryId, title, imageFile) {
     try {
       const _uuid = UUID.v4();
-      // const imageResponse = await this.bucket.upload(imageFile, {
-      //   destination: _uuid + '.png',
-      //   resumable: true,
-      //   metadata: {
-      //     metadata: {
-      //       firebaseStorageDownloadTokens: 'xerxes',
-      //     }
-      //   }
-      // });
+      const imageResponse = await this.bucket.upload(imageFile, {
+        destination: _uuid + '.png',
+        resumable: true,
+        metadata: {
+          metadata: {
+            firebaseStorageDownloadTokens: 'xerxes',
+          }
+        }
+      });
 
       this.collection.add({
         categoryId,
@@ -41,9 +41,7 @@ class EventsRepository extends AbstractRepository {
   
       return imageMap;
     } catch {
-      return {
-        'ehll': 'red'
-      }
+      return {}
     }
   }
 

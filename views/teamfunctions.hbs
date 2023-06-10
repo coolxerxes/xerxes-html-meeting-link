@@ -11,85 +11,21 @@
 <nav class="nav-container">
 
   <ul class="left-side">
-     <li><a href="index.html">Meetinglink.site</a> </li>
+     <li><a href="/">Meetinglink.space</a> </li>
   </ul>
 <ul class="left-side">
-      <li><a class="logout" href="family.html"><button class="family">Family Fun</button></a></li> 
+      <li><a class="logout" href="/family"><button class="family">Family Fun</button></a></li> 
     </ul>
 
   <ul class="right-side">
     
     
      <li><a class="logout" href="">Subscription Here</a></li> 
-     <li><a href="login.html" style="color:darkblue">Log Out</a></li>
+     <li><a href="/login" style="color:darkblue">Log Out</a></li>
   </ul>
    
  </nav>
-
- <style>
-
-.family
-      {
-      background-color: rgb(0, 33, 150);
-      border-color: #000000;
-      border-width: 6px;
-      border-radius: 6px;
-      color:rgb(255, 255, 255);
-      width: 120px; 
-      cursor: pointer;
-      font-size: 15px;
-      font: bold;
-      }
-  
- *
- {
-  padding: 0;
-  margin: 0;
-  box-sizing: corder-box;
- }
- body
- {
-  width: 100%;
-  margin: 0 auto;
- }
- .nav-container
- {
-  background-color:rgb(0, 0, 0);
-  border-bottom: 3px solid rgb(0, 34, 129);
-  display: flex;
-  justify-content: space-between;
- }
- .right-side, left-side
- {
-  list-style-type: none;
- }
- .right-side li, .leftside li
- {
-  display: inline-block;
- }
  
- .right-side li a, .left-side li a
- {
-  text-decoration: none;
-  display: block;
-  width: 100%;
-  font-size: 10px;
-  color:blue;
-  padding: 15px 10px;
-  font-weight: bold;
- }
-
- .left-side li a
- {
-  height: 100%;
-  width: -5%;
-  font-size: 10px;
- }
-
-</style>
-
-
-
 </head>
 
  
@@ -99,7 +35,7 @@
   .parent    
 {
   margin-right: px;
-  float: right;
+  float: left;
   width: 130px;
   height: 50px;
   
@@ -113,7 +49,7 @@
 
 
 
-</div>
+</div><br><br><br>
 
 
 
@@ -160,111 +96,6 @@ el = el.nextSibling;
 this.classList.add('bak');
 };
 }
-
-
-
-
-
-
-
-
-
-
-const parent1 = document.getElementById('parent1');
-
-
-const child1 = document.getElementById('child1');
-
-
-
-child1.style.display = "non";
-
-parent1.addEventListener("click",
-(event) => {
-
-
-if(child1.style.display == "none"){
-child1.style.display = "block";
-
-
-
-child2.style.display = "none";
-child3.style.display = "none";
-child4.style.display = "none";
-child5.style.display = "none";
-child6.style.display = "none";
-child7.style.display = "none";
-child8.style.display = "none";
-child9.style.display = "none";
-child10.style.display ="none";
-
-} else {
-child1.style.display = "none";
-}
-})
-
-const parent2 = document.getElementById('parent2');
-
-
-const child2 = document.getElementById('child2');
-
-child2.style.display = "none";
-
-parent2.addEventListener("click",
-(event) => {
-
-
-if(child2.style.display == "none"){
-child2.style.display = "block";
-
-
-child1.style.display = "none";
-child3.style.display = "none";
-child4.style.display = "none";
-child5.style.display = "none";
-child6.style.display = "none";
-child7.style.display = "none";
-child8.style.display = "none";
-child9.style.display = "none";
-child10.style.display ="none";
-
-} else {
-child2.style.display = "none";
-}
-})
-
-const parent3 = document.getElementById('parent3');
-
-
-const child3 = document.getElementById('child3');
-
-child3.style.display = "none";
-
-parent3.addEventListener("click",
-(event) => {
-
-
-if(child3.style.display == "none"){
-child3.style.display = "block";
-
-child1.style.display = "none";
-child2.style.display = "none";
-child4.style.display = "none";
-child5.style.display = "none";
-child6.style.display = "none";
-child7.style.display = "none";
-child8.style.display = "none";
-child9.style.display = "none";
-child10.style.display ="none";
-
-} else {
-child3.style.display = "none";
-}
-})
-
-
-
-
 
 
 </script>
@@ -332,7 +163,7 @@ border-radius: 10px;
         
     
      
-     h2
+     h1
     {
       color:rgb(255, 255, 255);
       font-size: 35px;
@@ -393,14 +224,7 @@ border-radius: 10px;
   }
 </style>
 
-       
-      
-
-     
-      
-       
- 
-            <h1>Edit Team Function</h1>
+           <h1>Edit Team Function</h1>
 
              <div id="form">                                      
               <label>Name</label>
@@ -465,16 +289,125 @@ border-radius: 10px;
 
 </body>
 
+<style>
+
+.family
+      {
+      background-color: rgb(0, 33, 150);
+      border-color: #000000;
+      border-width: 6px;
+      border-radius: 6px;
+      color:rgb(255, 255, 255);
+      width: 120px; 
+      cursor: pointer;
+      font-size: 15px;
+      font: bold;
+      }
+  
+ *
+ {
+  padding: 0;
+  margin: 0;
+  box-sizing: corder-box;
+ }
+ body
+ {
+  width: 100%;
+  margin: 0 auto;
+ }
+ .nav-container
+ {
+  background-color:rgb(0, 0, 0);
+  border-bottom: 3px solid rgb(0, 34, 129);
+  display: flex;
+  justify-content: space-between;
+ }
+ .right-side, left-side
+ {
+  list-style-type: none;
+ }
+ .right-side li, .leftside li
+ {
+  display: inline-block;
+ }
+ 
+ .right-side li a, .left-side li a
+ {
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  font-size: 10px;
+  color:blue;
+  padding: 15px 10px;
+  font-weight: bold;
+ }
+
+ .left-side li a
+ {
+  height: 100%;
+  width: -5%;
+  font-size: 10px;
+ }
+
+ .child {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  font-style: oblique;
+}
+
+.child div {
+  margin: 2px;
+}
+
+.child div label input[type="checkbox"] {
+  display: none;
+}
+
+.child div label span {
+  position: relative;
+  display: inline-block;
+  background: #dedfde;
+  padding: 15px 30px;
+  color: #000000;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 5);
+  border-radius: 30px;
+  font-size: 20px;
+  transition: 0.5s;
+  user-select: none;
+  overflow: hidden;
+  font-style: italic;
+  font: bold;
+}
+
+.child div label span::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: rrgb(255, 255, 255. 0, );
+}
+
+.child div label input[type="checkbox"] checked~span {
+  background: #ffffff;
+}
+
+.child
+
+/*div:nth-child(6n + 1)*/
+label input[type="checkbox"]:checked~span {
+  color: #00d215;
+  background: rgb(0, 33, 150);
+  ;
+  box-shadow: 0 2px 20px #e91e63 rgb(237, 237, 237);
+}
+
+</style>
 
 
 </html>
   
 
-
-
-
-
-
-
-
-</html>

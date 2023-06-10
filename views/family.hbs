@@ -4,29 +4,34 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/assets/styles/styles.css">
   <title>Document</title>
 </head>
  
-<nav class="nav-container">
+ <nav class="nav-container">
+  <ul class="left-side">
+     <li>
+        <a href="/">Meetinglink.space</a> 
+     </li>
+  </ul>
 
   <ul class="left-side">
-     <li><a href="index.html">Meetinglink.site</a> </li>
-  </ul>
-  <ul class="left-side">
-    <li><a class="logout" href="family.html"><button class="family">Family Fun</button></a></li> 
+     <li>
+        <a class="logout" href="/family"><button class="family">Family Fun</button></a>
+     </li> 
   </ul>
 
   <ul class="right-side">
-    
-     
-     <li><a href="login.html" style="color:darkblue">Log Out</a></li>
+     <li>
+        <a href="/login" style="color:darkblue">Log Out</a>
+     </li>
   </ul>
-
  </nav>
    
-    <marquee><h1><img src="runm.png"><img src="runw.png"><img src="runw.png"><img src="runm.png"></h1>
+    <marquee><h1><img src="./assets/images/runm.png"><img src="./assets/images/runw.png"><img src="./assets/images/runw.png"><img src="./assets/images/runm.png"></h1>
     <h1 style="color:white; font-size: 15px;">!!Did you run today!!</h1></marquee>
    
+  
 <style>
 
 .family
@@ -97,17 +102,6 @@ body
   font-size: 10px;
  }
   
- .family2
- {
-  position:absolute;
-  right: 0.6%;
-  border-radius: 5px;
-  color:rgb(255, 255, 255);
-  font-size: 20px;
-  background-color: rgb(1, 1, 154);
-  cursor: pointer;
-  width: 220px;
- }
 
 </style>
 
@@ -121,14 +115,14 @@ body
  
   /*container to center the map*/
   #container {
-    height: 20vh;
+    height: 25vh;
     display: flex;
     justify-content: right;
     
   }
    #map {
-    height: 44vh;
-    width: 55vw;
+    height: 30vh;
+    width: 50vw;
    }
    html, body{
     margin: 0;
@@ -141,8 +135,9 @@ body
 
 
 
+
 <body><br>
-  <a href="teamfunctions.html"><button class=family4>Team Function</button></a>
+  <a href="/localpostfunctions"><button class=localpost >Create Local Post</button></a>
 <br><br>
 
 
@@ -172,25 +167,50 @@ body
  
 <body>
   
-          <br><br><br><br><br><br> <br><br><br><br><br>
-        <a href="familyfunctions.html"><button class=family2>Create Family Function</button></a>
+          <br><br><br><a href="/teamfunctions"><button class=family4>Team Function</button></a> 
+          <br><br><br>
+        <a href="/familyfunctions"><button class=family2 >Create Family Function</button></a>
           <br><br>
           
 
- <a href="familyphotos.html"><button class=family3 familyphoto.html>Family Photos</button></a>
  
-<img  src="family-tree.jpg" class="familytree">
+ <a href="/familyphotos"><button class=family3 familyphoto.html>Family Photos</button></a>
+<img  src="./assets/images/family-tree.jpg" class="familytree">
 
    <style>
+
+.family2
+ {
+  position:absolute;
+  right: 0.6%;
+  border-radius: 5px;
+  color:rgb(255, 255, 255);
+  font-size: 20px;
+  background-color: rgb(2, 109, 0);
+  cursor: pointer;
+  width: 240px;
+ }
 
 .family4
  {
   position:absolute;
-  right: 8%;
+  right: 4.5%;
   border-radius: 5px;
   color:rgb(255, 255, 255);
   font-size: 18px;
-  background-color: rgb(20, 95, 0);
+  background-color: rgb(14, 0, 118);
+  cursor: pointer;
+  width: 170px;
+ }
+
+ .localpost
+ {
+  position:absolute;
+  right: 3.5%;
+  border-radius: 5px;
+  color:rgb(255, 255, 255);
+  font-size: 18px;
+  background-color: rgb(0, 0, 0);
   cursor: pointer;
   width: 170px;
  }
@@ -203,7 +223,7 @@ body
   border-radius: 5px;
   color:rgb(3, 102, 0);
   font-size: 18px;
-  background-color: rgba(243, 233, 233, 0.582);
+  background-color: rgba(233, 243, 234, 0.582);
   cursor: pointer;
   width: 140px;
  }
@@ -217,11 +237,12 @@ body
   
  
   width: 210px;
-  height: 270px;
+  height: 250px;
  
 }
 
    </style>
+
   
 
   

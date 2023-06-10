@@ -13,7 +13,7 @@ class UsersRepository extends AbstractRepository {
       const data = docs.map(doc => {
         return {
           id: doc.id,
-          title: doc.get('title')
+          title: doc.get('label')
         }
       });
 

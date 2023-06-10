@@ -10,19 +10,22 @@
 </head>
 
 <nav class="nav-container">
-
   <ul class="left-side">
-    <li><a href="/">Meetinglink.site</a> </li>
+     <li>
+        <a href="/">Meetinglink.space</a> 
+     </li>
   </ul>
+  
   <ul class="left-side">
-    <li><a class="logout" href="family.html"><button class="family">Family Fun</button></a></li>
+     <li>
+         <a class="logout" href="/family"><button class="family">Family Fun</button></a>
+     </li>
   </ul>
-
   <ul class="right-side">
-
-    <li><a href="login.html" style="color:darkblue">Log Out</a></li>
+     <li>
+         <a href="login.html" style="color:darkblue">Log Out</a>
+     </li>
   </ul>
-
 </nav>
 
 <style>
@@ -103,6 +106,8 @@
 
 <div class="scroll" id="categories">
 </div>
+
+
 
 <!-----------------------------CHILD--1--LIST--------------------------------->
 
@@ -266,7 +271,7 @@
   </style>
 
 
-
+   
 
   <div id="form">
 
@@ -297,8 +302,12 @@
 
     <br>
     <button class="save">
-      <a class="submit" style=color:white onclick="onSaveClick()">save</a>
+      <a class="submit" style=color:white href="/hostpost" onclick="onSaveClick()">save</a>
     </button>
+    
+    <button class="save">
+            <a class="back" style=color:white onclick="window.history.back()">back to List</a>
+        </button>
 
   </div>
   </form>

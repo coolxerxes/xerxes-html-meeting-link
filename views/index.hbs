@@ -8,126 +8,57 @@
   <link rel="stylesheet" href="/assets/styles/styles.css">
   <title>Document</title>
 
-  <!----------------------------------HEAD---------------------------------------------->
+  <!----------------------------------HEADER CONTAINER---------------------------------------------->
+  <!----------------------------------HEADER CONTAINER---------------------------------------------->
+  <!----------------------------------HEADER CONTAINER---------------------------------------------->
 
   <head>
+
     <div class="hero">
       <div class="container">
-        <style>
-          * {
-            padding: 0;
-            margin: 0;
-            box-sizing: corder-box;
-          }
-
-          body {
-            width: 100%;
-            margin: 0 auto;
-          }
-
-          .nav-container {
-            background-color: rgb(0, 0, 0);
-            border-bottom: 3px solid rgb(0, 34, 129);
-            display: flex;
-            justify-content: space-between;
-          }
-
-          .right-side,
-          left-side {
-            list-style-type: none;
-          }
-
-          .right-side li,
-          .leftside li {
-            display: inline-block;
-          }
-
-          .right-side li a,
-          .left-side li a {
-            text-decoration: none;
-            display: block;
-            width: 100%;
-            font-size: 15px;
-            color: blue;
-            padding: 14px 16px;
-            font-weight: bold;
-          }
-
-          .left-side li a {
-            height: 100%;
-            width: -5%;
-            font-size: 10px;
-          }
-
-
-          .family {
-            background-color: rgb(0, 33, 150);
-            border-color: #000000;
-            border-width: 6px;
-            border-radius: 6px;
-            color: rgb(255, 255, 255);
-            width: 120px;
-            cursor: pointer;
-            font-size: 15px;
-            font: bold;
-          }
-
-          .h {
-            background-color: rgb(0, 33, 150);
-            border-color: #000000;
-            border-width: 6px;
-            border-radius: 6px;
-            color: rgb(255, 255, 255);
-            width: 25px;
-            cursor: pointer;
-            font-size: 15px;
-            font: bold;
-          }
-        </style>
-
-
         <nav class="nav-container">
 
+
           <ul class="left-side">
-            <li><a href="">Meetinglink.site</a></li>
-          </ul>
-          <li><a class="logout" href="/catagorypost"><button class="h">C</button></a></li>
-          <li><a class="logout" onclick="getLocation()"><button class="h">G</button></a></li>
-          <li><a class="logout" href="/family"><button class="family">Family Fun</button></a></li>
-
+            <li><a href="/">Meetinglink.space</a></li>
           </ul>
 
+           <li><a class="logout" href="/catagorypost"><button class="h">C</button></a></li>
+
+           <li>
+            <a class="logout" href="/family"><button class="family">Family Fun</button></a>
+           </li>
+
+          </ul>
 
           <ul class="right-side"></ul>
-          <li><a class="logout" href="/hostpost"><button class="h">P</button></a></li>
-          <li><a href="/login" style="color:darkblue">log out</a></li>
+              <li><a class="logout" href="/hostpost"><button class="h">P</button></a></li>
+
+                   <li><a href="/login" style="color:darkblue">log out</a></li>
           </ul>
-
         </nav>
-
-        </script>
-
-
-        <!---------------------------------MAP--------------------------------------------->
-
-
+        <!---------------------------------------MAP----------------------------------------------------------------->
+        <!---------------------------------------MAP----------------------------------------------------------------->
+        <!---------------------------------------MAP----------------------------------------------------------------->
 
         <style>
           /*container to center the map*/
-          #container {
+          #container 
+          {
             height: 72vh;
             display: flex;
             justify-content: center;
             align-items: center;
           }
 
-          #map {
+          #map 
+          {
             height: 70vh;
             width: 85vw;
           }
 
-          html,
-          body {
+          html, body 
+          {
             margin: 0;
             padding: 0;
           }
@@ -140,32 +71,15 @@
     </div>
 
     <script>
-      widnow.categories = [];
+      window.categories = [];
       const test = location.search.slice(1).split('=');
 
       if (test.length === 2 && test[1].length != 0) {
         window.categories = test[1].split(',').map(_item => decodeURI(_item));
       }
 
-      function getLocation() {
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(showPosition);
-        } else {
-          alert('Geolocation is not supported by this browser.')
-        }
-      }
-
-      function showPosition(position) {
-        //x.innerHTML = "Latitude: " + position.coords.latitude +
-        //  "<br>Longitude: " + position.coords.longitude;
-
-        window.map.setCenter({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        })
-      }
-
       function initMap() {
+
         let mapOptions = {
           center: { lat: 26.60775105325326, lng: -81.94498671487925 },
           zoom: 10,
@@ -184,6 +98,8 @@
             fetch(window.categories.length > 0 ? `/api/item/filter/${window.categories.join(',')}` : '/api/item')
               .then((info) => info.json())
               .then(data => {
+                window.items = data;
+
                 document.getElementById('table').innerHTML = data
                   .map((tr) => {
                     const marker = new google.maps.Marker({
@@ -196,7 +112,7 @@
                     });
                     marker.addListener('click', () => { //(markers can only be keyboard focusable when they have click listeners)
                       let contentString = `<dl class="row bg-white text-dark adaptive"><h2 id="heading${tr.id}">${marker.title}</h2>`;
-                      delete tr.eventId;
+                      //delete tr.eventId;
                       for (const [key, value] of Object.entries(tr)) {
                         if (key !== 'Id') {
                           contentString += `<dt class="col-6">${key}</dt><dd class="col-6">`;
@@ -229,28 +145,34 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJFNO8DbbNEa82seuZX15PUoK2gShqdFs&map_ids=b4762a932ac83060&callback=initMap">
       </script>
 
-    <!-------------------------------PARENT--------------------------------------->
+    <!----------------------------------------PARENT----------------------------------------------------------------->
+    <!----------------------------------------PARENT----------------------------------------------------------------->
+    <!----------------------------------------PARENT----------------------------------------------------------------->
+
+    
     <style>
-      .parent {
+      .parent 
+      {
         margin-right: px;
-        float: right;
+        float: left;
         width: 130px;
         height: 50px;
       }
     </style>
-    <div class="scroll" id="categories">
+
+             <div class="scroll" id="categories">
     </div>
-
     <!-----------------------------CHILD--1--LIST--------------------------------->
-
+    <!-----------------------------CHILD--1--LIST--------------------------------->
+    <!-----------------------------CHILD--1--LIST--------------------------------->
     <ul>
-      <div class="child" id="events">
+        <div class="child" id="events">
 
-      </div>
+        </div>
     </ul>
-
     <!------------------------------JS----Button----exc.....------------------------------>
-
+    <!------------------------------JS----Button----exc.....------------------------------>
+    <!------------------------------JS----Button----exc.....------------------------------>
     <script>
       function onDelete(id) {
         const buildings = JSON.parse(localStorage.getItem('host') || '[]');
@@ -261,12 +183,14 @@
 
         location.href = '/';
       }
-
     </script>
-
+    <!------------------------------SUMMIT-BUTTON------------------------------------->
+    <!------------------------------SUMMIT-BUTTON------------------------------------->
     <!------------------------------SUMMIT-BUTTON------------------------------------->
 
     <button class="summit" onclick="onSubmit()">summit !!!!</button>
+   
+    <button class="summits" onclick="onSubmit()">Delete !!!!</button>
 
     <div>
       <table style="color: white;">
@@ -299,14 +223,21 @@
         const inputs = document.querySelectorAll('input[type=checkbox]');
 
         let categories = [];
+        let showList = [];
         for (let i = 0; i < inputs.length; ++i) {
           if (inputs[i].checked == true) {
             var category = inputs[i].parentNode.parentElement.id;
+            var title = inputs[i].parentNode.children[1].textContent;
             categories.push(category);
+            showList.push(title);
           }
         }
+        //alert(categories.join(','));
+        //const myItems = window.items.filter(_item => categories.includes(_item.eventId));
 
-        alert(categories.join(','));
+        //const labels = myItems.map(_item => _item.name);
+
+        //alert(labels.join(', '));
 
         location.href = `?filter=${categories.join(',')}`;
       }
@@ -351,10 +282,109 @@
               })
               .join('');
           })
-
-
       }
     </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!----------------------------------------------STYLE--------------------------------------------------------------->
+<!----------------------------------------------STYLE--------------------------------------------------------------->
+<!----------------------------------------------STYLE--------------------------------------------------------------->
+
+<style>
+  * 
+  {
+  padding: 0;
+  margin: 0;
+  box-sizing: corder-box;
+  }
+
+  body 
+  {
+  width: 100%;
+  margin: 0 auto;
+  }
+
+  .nav-container 
+  {
+  background-color: rgb(0, 0, 0);
+  border-bottom: 3px solid rgb(0, 34, 129);
+  display: flex;
+  justify-content: space-between;
+  }
+
+  .right-side, left-side 
+  {
+  list-style-type: none;
+  }
+
+  .right-side li,.leftside li 
+  {
+  display: inline-block;
+  }
+
+  .right-side li a,.left-side li a 
+  {
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  font-size: 15px;
+  color: blue;
+  padding: 14px 16px;
+  font-weight: bold;
+  }
+
+  .left-side li a 
+  {
+  height: 100%;
+  width: -5%;
+  font-size: 10px;
+  }
+
+
+  .family 
+  {
+  background-color: rgb(0, 33, 150);
+  border-color: #000000;
+  border-width: 6px;
+  border-radius: 6px;
+  color: rgb(255, 255, 255);
+  width: 120px;
+  cursor: pointer;
+  font-size: 15px;
+  font: bold;
+  }
+
+  .h 
+  {
+  background-color: rgb(0, 33, 150);
+  border-color: #000000;
+  border-width: 6px;
+  border-radius: 6px;
+  color: rgb(255, 255, 255);
+  width: 25px;
+  cursor: pointer;
+  font-size: 15px;
+  font: bold;
+  }
+
+  .sumitts
+  {
+  margin: right;
+
+  }
+</style>
 
   </body>
 
