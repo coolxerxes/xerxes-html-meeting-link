@@ -210,5 +210,6 @@ const server = https.createServer(
 
 server.listen(process.env.PORT || 3000
 , () => {
+  console.log(process.env.PORT)
   console.log('Server running on port https://127.0.0.1:3000')
 })
