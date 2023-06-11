@@ -203,7 +203,7 @@ const options = {
   cert: certificate,
 }
 
-const server = https.createServer(
+const server = http.createServer(
   options,
   app,
 )
