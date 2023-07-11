@@ -7,11 +7,27 @@ var https = require('https');
 var fs = require('fs');
 var http = require('http');
 var sessions = require('express-session');
-const usersRepository = require('./models/users.repository');
-const categoriesRepository = require('./models/categories.repository');
-const eventsRepository = require('./models/events.repository');
-const itemsRepository = require('./models/items.repository');
+
+const usersRepository = require('./repositories/users.repository');
+const categoriesRepository = require('./repositories/categories.repository');
+const eventsRepository = require('./repositories/events.repository');
+const itemsRepository = require('./repositories/items.repository');
+
 const session = require('express-session');
+const sequelize = require('./models/init');
+
+async function synchronizeDatabase() {
+  try {
+    await sequelize.sync({ force: false }); // Use { force: true } to drop existing tables and recreate them
+    console.log('Database synchronized successfully.');
+
+    // eventsRepository.getEventListByCategoryId('1').then(console.log);
+  } catch (error) {
+    console.error('Error synchronizing the database:', error);
+  }
+}
+
+synchronizeDatabase();
 
 // usersRepository.login('dezzy239king@gmail.com', 'GOOGLE').then(console.log);
 
@@ -32,18 +48,18 @@ const oneDay = 1000 * 60 * 60 * 24;
 
 app.use(session({
   secret: 'desmond nettles',
-  saveUninitialized:true,
+  saveUninitialized: true,
   cookie: { maxAge: oneDay },
   resave: false
 }))
 
 app.use(cors());
 app.use(fileUpload());
-app.use(isAuth);
+// app.use(isAuth);
 app.use('/api', router);
 
 function isAuth(req, res, next) {
-  
+
   if (req.path !== '/login' && req.path !== '/register' && req.method === 'GET' && !req.session.user) {
     res.redirect('/login')
     return
@@ -52,7 +68,7 @@ function isAuth(req, res, next) {
   next();
 }
 
-router.post('/upload', async function(req, res) {
+router.post('/upload', async function (req, res) {
   const title = req.body.name;
   const categoryId = req.body.categoryId;
   const file = req.files.file;
@@ -66,10 +82,10 @@ router.post('/upload', async function(req, res) {
 
     res.sendStatus(200);
   })
-  
+
 });
 
-router.post('/login', async function(req, res) {
+router.post('/login', async function (req, res) {
   const { email, type, password } = req.body;
 
   const result = await usersRepository.login(email, type, password);
@@ -105,6 +121,13 @@ router.get('/categories/:id', async function (req, res) {
   res.status(200).json(events);
 })
 
+router.get('/d-categories/:id', async function (req, res) {
+  const id = req.params.id;
+  const events = await eventsRepository.getEventListByDirectCategoryId(id);
+
+  res.status(200).json(events);
+})
+
 router.post('/item', async function (req, res) {
   const { name, address, phone, hours, website, description, latitude, longitude, eventId } = req.body;
 
@@ -115,7 +138,6 @@ router.post('/item', async function (req, res) {
 
 router.get('/imageMap', async function (req, res) {
   const result = await eventsRepository.getEventImageMap();
-
   res.status(200).json(result);
 })
 
@@ -128,7 +150,15 @@ router.patch('/item', async function (req, res) {
 });
 
 router.get('/item', async function (req, res) {
-  const result = await itemsRepository.getItemList();
+  const result = await itemsRepository.getItemListByEvents([
+    // '8dEjk12lEX99pqOfibH3',
+    // 'URXRiJU2DJJaT9vGjGpL',
+    // 'VhTvtyjLjkkiKlCE3CMd',
+    // 'fgkC3b5G0TRP8hZ0USbW',
+    5, 11, 12, 16
+  ]);
+
+  // const result = await itemsRepository.getItemList();
 
   res.status(200).json(result);
 })
@@ -176,7 +206,7 @@ app.get('/hostpost', function (req, res) {
   res.render('hostpost');
 })
 
-app.get('/', function(req, res) {
+app.get('/', function (req, res) {
   res.render('index');
 })
 
@@ -208,8 +238,8 @@ const server = http.createServer(
   app,
 )
 
-server.listen(process.env.PORT || 3000
-, () => {
-  console.log(process.env.PORT)
-  console.log('Server running on port https://127.0.0.1:3000')
-})
+app.listen(process.env.PORT || 3000
+  , () => {
+    console.log(process.env.PORT)
+    console.log('Server running on port https://127.0.0.1:3000')
+  })

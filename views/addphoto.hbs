@@ -27,70 +27,7 @@
 
  <body>
 
- <style>
-
-.family
-      {
-      background-color: rgb(0, 33, 150);
-      border-color: #000000;
-      border-width: 6px;
-      border-radius: 6px;
-      color:rgb(255, 255, 255);
-      width: 120px; 
-      cursor: pointer;
-      font-size: 15px;
-      font: bold;
-      }
-  
- *
- {
-  padding: 0;
-  margin: 0;
-  box-sizing: corder-box;
- }
- body
- {
-  width: 100%;
-  margin: 0 auto;
- }
- .nav-container
- {
-  background-color:rgb(0, 0, 0);
-  border-bottom: 3px solid rgb(0, 34, 129);
-  display: flex;
-  justify-content: space-between;
- }
- .right-side, left-side
- {
-  list-style-type: none;
- }
- .right-side li, .leftside li
- {
-  display: inline-block;
- }
- 
- .right-side li a, .left-side li a
- {
-  text-decoration: none;
-  display: block;
-  width: 100%;
-  font-size: 10px;
-  color:blue;
-  padding: 15px 10px;
-  font-weight: bold;
- }
-
- .left-side li a
- {
-  height: 100%;
-  width: -5%;
-  font-size: 10px;
- }
-
-</style>
-
-
-                                                    <style>
+                                            <style>
                                                       .parent    
                                                     {
                                                       margin-right: px;
@@ -118,11 +55,9 @@
 
 <div class="parentlist"><button class="parent" id="parent2">Birthdays</div></button>
 
+<div class="parentlist"><button class="parent" id="parent6">Vacation photos</button></div>
 
-
-<div class="parentlist"><button class="parent" id="parent6">Vacation photos</button>
-
-</div>
+<div class="parentlist"><button class="parent" id="parent11"><a href="/addphoto">Add Photos Here</a></button></div>
 
 </div>
 
@@ -229,7 +164,6 @@
 <ul id="child3">
 
 <div class="child"> 
-  
   <div>
   <label>
   <input type="checkbox" name="">
@@ -243,6 +177,7 @@
   <span>Your Weddings</span>
   </label>
   </div>
+
   <div>
   <label>
   <input type="checkbox" name="">
@@ -256,12 +191,14 @@
   <span>Birthdays</span>
   </label>
   </div>
+
   <div>
   <label>
   <input type="checkbox" name="">
   <span>Singing</span>
   </label>
   </div>
+
   <div>
   <label>
   <input type="checkbox" name="">
@@ -269,19 +206,20 @@
   </label>
   </div>
 
- 
   <div>
   <label>
   <input type="checkbox" name="">
   <span>Comedy</span>
   </label>
   </div>
+
   <div>
   <label>
   <input type="checkbox" name="">
   <span>All Birthdays</span>
   </label>
   </div>
+
   <div>
   <label>
   <input type="checkbox" name="">
@@ -317,15 +255,15 @@
 
 <!----------------------------------CHILD4-------------------------------------------->
 
-<ul id="child4">
 
+<ul id="child4">
   <div class="child"> 
   
    <div>
-<label>
-<input type="checkbox" name="">
-<span>Chrismas</span>
-</label>
+ <label>
+     <input type="checkbox" name="">
+      <span>Chrismas</span>
+  </label>
 </div>
 
 <div>
@@ -348,6 +286,7 @@
 <span>Thanksgiving</span>
 </label>
 </div>
+
 <div>
 <label>
 <input type="checkbox" name="">
@@ -368,6 +307,7 @@
 <span>Shows</span>
 </label>
 </div>
+
 <div>
 <label>
 <input type="checkbox" name="">
@@ -388,6 +328,7 @@
 <span>Stage Show</span>
 </label>
 </div>
+
 <div>
 <label>
 <input type="checkbox" name="">
@@ -412,7 +353,12 @@
 </div>
   
   </ul>
+  
 
+
+
+
+                         
 
 
 
@@ -528,11 +474,11 @@ elements[i].onclick = function()
 var el = elements[0];
 while(el)
 {
-  if(el.tagName === 'DIV'){
+if(el.tagName === 'DIV'){
 
-    el.classList.remove ('bak');
-  }
-  el = el.nextSibling;
+el.classList.remove ('bak');
+}
+el = el.nextSibling;
 }
 
 this.classList.add('bak');
@@ -540,50 +486,34 @@ this.classList.add('bak');
 }
 
 
-
-
-
-
-
-
-
-
 const parent1 = document.getElementById('parent1');
-
-
 const child1 = document.getElementById('child1');
 
-
-
-child1.style.display = "non";
+child1.style.display = "none";
 
 parent1.addEventListener("click",
 (event) => {
+if(child1.style.display == "none"){
+child1.style.display = "block";
 
+child2.style.display = "none";
+child3.style.display = "none";
+child4.style.display = "none";
+child5.style.display = "none";
+child6.style.display = "none";
+child7.style.display = "none";
+child8.style.display = "none";
+child9.style.display = "none";
+child10.style.display ="none";
 
- if(child1.style.display == "none"){
-   child1.style.display = "block";
-
-
-   
-   child2.style.display = "none";
-   child3.style.display = "none";
-   child4.style.display = "none";
-   child5.style.display = "none";
-   child6.style.display = "none";
-   child7.style.display = "none";
-   child8.style.display = "none";
-   child9.style.display = "none";
-   child10.style.display ="none";
-
- } else {
-   child1.style.display = "none";
- }
+} else {
+child1.style.display = "none";
+}
 })
 
+
+
 const parent2 = document.getElementById('parent2');
-
-
 const child2 = document.getElementById('child2');
 
 child2.style.display = "none";
@@ -591,75 +521,81 @@ child2.style.display = "none";
 parent2.addEventListener("click",
 (event) => {
 
+if(child2.style.display == "none"){
+child2.style.display = "block";
 
- if(child2.style.display == "none"){
-   child2.style.display = "block";
+child1.style.display = "none";
+child3.style.display = "none";
+child4.style.display = "none";
+child5.style.display = "none";
+child6.style.display = "none";
+child7.style.display = "none";
+child8.style.display = "none";
+child9.style.display = "none";
+child10.style.display ="none";
 
-
-   child1.style.display = "none";
-   child3.style.display = "none";
-   child4.style.display = "none";
-   child5.style.display = "none";
-   child6.style.display = "none";
-   child7.style.display = "none";
-   child8.style.display = "none";
-   child9.style.display = "none";
-   child10.style.display ="none";
-
- } else {
-   child2.style.display = "none";
- }
+} else {
+child2.style.display = "none";
+}
 })
 
+
+
 const parent3 = document.getElementById('parent3');
-
-
 const child3 = document.getElementById('child3');
 
 child3.style.display = "none";
 
 parent3.addEventListener("click",
 (event) => {
+if(child3.style.display == "none"){
+child3.style.display = "block";
 
+child1.style.display = "none";
+child2.style.display = "none";
+child4.style.display = "none";
+child5.style.display = "none";
+child6.style.display = "none";
+child7.style.display = "none";
+child8.style.display = "none";
+child9.style.display = "none";
+child10.style.display ="none";
 
- if(child3.style.display == "none"){
-   child3.style.display = "block";
-
-   child1.style.display = "none";
-   child2.style.display = "none";
-   child4.style.display = "none";
-   child5.style.display = "none";
-   child6.style.display = "none";
-   child7.style.display = "none";
-   child8.style.display = "none";
-   child9.style.display = "none";
-   child10.style.display ="none";
-
- } else {
-   child3.style.display = "none";
- }
+} else {
+child3.style.display = "none";
+}
 })
 
 
 
+const parent4 = document.getElementById('parent4');
+const child4 = document.getElementById('child4');
 
+child4.style.display = "none";
 
+parent4.addEventListener("click",
+(event) => {
+if(child4.style.display == "none"){
+child4.style.display = "block";
 
+child1.style.display = "none";
+child2.style.display = "none";
+child3.style.display = "none";
+child5.style.display = "none";
+child6.style.display = "none";
+child7.style.display = "none";
+child8.style.display = "none";
+child9.style.display = "none";
+child10.style.display ="none";
 
+} else {
+child4.style.display = "none";
+}
+})
 
-
-
-
-
-
-
-
-
- </script>
-
+</script>
 
  
-
  </div>         
 
 
@@ -758,37 +694,6 @@ border-radius: 10px;
   </style>
 
 
-
-
- 
-        
-<style type="text/css" >
-  label
-  {
-   
-    display:inline-block'
-  }
-  
-  #form
-  {
-    border-radius: 10px;;
-    width:20px;
-    padding:4px;
-  }
-  h2
-  {
-    text-align: center;
-  }
-</style>
-
-       
-      
-
-     
-      
-       
-
-
              <div id="form">
 
               <form>
@@ -844,4 +749,88 @@ border-radius: 10px;
 
   
 </body>
+
+
+ <style>
+
+  <style type="text/css" >
+  label
+  {
+   
+    display:inline-block'
+  }
+  
+  #form
+  {
+    border-radius: 10px;;
+    width:20px;
+    padding:4px;
+  }
+  h2
+  {
+    text-align: center;
+  }
+</style>
+
+<style>
+
+.family
+      {
+      background-color: rgb(0, 33, 150);
+      border-color: #000000;
+      border-width: 6px;
+      border-radius: 6px;
+      color:rgb(255, 255, 255);
+      width: 120px; 
+      cursor: pointer;
+      font-size: 15px;
+      font: bold;
+      }
+  
+ *
+ {
+  padding: 0;
+  margin: 0;
+  box-sizing: corder-box;
+ }
+ body
+ {
+  width: 100%;
+  margin: 0 auto;
+ }
+ .nav-container
+ {
+  background-color:rgb(0, 0, 0);
+  border-bottom: 3px solid rgb(0, 34, 129);
+  display: flex;
+  justify-content: space-between;
+ }
+ .right-side, left-side
+ {
+  list-style-type: none;
+ }
+ .right-side li, .leftside li
+ {
+  display: inline-block;
+ }
+ 
+ .right-side li a, .left-side li a
+ {
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  font-size: 10px;
+  color:blue;
+  padding: 15px 10px;
+  font-weight: bold;
+ }
+
+ .left-side li a
+ {
+  height: 100%;
+  width: -5%;
+  font-size: 10px;
+ }
+ </style>
+
 </html>

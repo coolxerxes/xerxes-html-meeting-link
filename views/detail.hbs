@@ -16,12 +16,12 @@
         <li><a href="/">Meetinglink.space</a> </li>
     </ul>
     <ul class="left-side">
-        <li><a class="logout" href="family.html"><button class="family">Family Fun</button></a></li>
+        <li><a class="logout" href="/family"><button class="family">Family Fun</button></a></li>
     </ul>
 
     <ul class="right-side">
 
-        <li><a href="login.html" style="color:darkblue">Log Out</a></li>
+        <li><a href="/login" style="color:darkblue">Log Out</a></li>
     </ul>
 
 </nav>
@@ -171,10 +171,6 @@
             <a class="back" style=color:white onclick="window.history.back()">back to List</a>
         </button>
         
-        <button class="save">
-            <a class="submit" style=color:white onclick="onDetailClick()">Edit</a>
-        </button>
-        
 
     <div id="form" style="float: left;"><br><br><br>
 
@@ -204,15 +200,8 @@
         <label>Longitude:</label><h3 type="text" name="longitude" id="longitude" style="color: white;font-size:17px;"></h3><br>
         
 
-       
-
         </div>
         
-            
-          
-        
-      
-
     </div>
  
    <div id="container">
@@ -297,8 +286,8 @@
 
                                 let mapOptions = {
                                     center: {
-                                        lat: building.latitude,
-                                        lng: building.longitude,
+                                        lat: +building.latitude,
+                                        lng: +building.longitude,
                                     },
                                     zoom: 10,
                                     mapId: 'b4762a932ac83060',
@@ -307,7 +296,8 @@
                                 let map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
                                 const marker = new google.maps.Marker({
-                                    icon: `https://firebasestorage.googleapis.com/v0/b/connect-cbff7.appspot.com/o/${window.imageMap[building.eventId]}.png?alt=media&token=xerxes`,
+                                    //icon: `https://firebasestorage.googleapis.com/v0/b/connect-cbff7.appspot.com/o/${window.imageMap[building.eventId]}.png?alt=media&token=xerxes`,
+                                    icon: `/assets/images/${window.imageMap[building.eventId]}.png`,
                                     map,
                                     position: {
                                         lat: building.latitude,

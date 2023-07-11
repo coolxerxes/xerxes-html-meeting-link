@@ -43,6 +43,29 @@ body {
   border-width: 4px;
   box-shadow: 0 0 5px rgb(255, 255, 255);
   border-radius: 10px;
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-options {
+  display: none;
+  position: absolute;
+  overflow: auto;
+  background-color:#fff;
+  border-radius:5px;
+  box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.4);
+}
+
+.parent:hover .dropdown-options {
+  display: block;
+}
+
+.dropdown-options a {
+  display: block;
+  columns: #000000;
+  padding: 5px;
+  text-decoration: none;
+  padding: 20px 40px;
 }
 
 .scroll {
@@ -132,9 +155,11 @@ label input[type="checkbox"]:checked~span {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
+  width: 180px;
 }
 
 h1 {
   font-size: 3w;
   margin: 15px 0;
 }
+

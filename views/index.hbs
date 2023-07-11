@@ -23,18 +23,13 @@
             <li><a href="/">Meetinglink.space</a></li>
           </ul>
 
-           <li><a class="logout" href="/catagorypost"><button class="h">C</button></a></li>
-
-           <li>
+          <li>
             <a class="logout" href="/family"><button class="family">Family Fun</button></a>
-           </li>
+          </li>
 
           </ul>
 
-          <ul class="right-side"></ul>
-              <li><a class="logout" href="/hostpost"><button class="h">P</button></a></li>
-
-                   <li><a href="/login" style="color:darkblue">log out</a></li>
+          <li><a href="/login" style="color:darkblue">log out</a></li>
           </ul>
         </nav>
         <!---------------------------------------MAP----------------------------------------------------------------->
@@ -43,22 +38,20 @@
 
         <style>
           /*container to center the map*/
-          #container 
-          {
+          #container {
             height: 72vh;
             display: flex;
             justify-content: center;
             align-items: center;
           }
 
-          #map 
-          {
+          #map {
             height: 70vh;
             width: 85vw;
           }
 
-          html, body 
-          {
+          html,
+          body {
             margin: 0;
             padding: 0;
           }
@@ -103,10 +96,11 @@
                 document.getElementById('table').innerHTML = data
                   .map((tr) => {
                     const marker = new google.maps.Marker({
-                      icon: `https://firebasestorage.googleapis.com/v0/b/connect-cbff7.appspot.com/o/${window.imageMap[tr.eventId]}.png?alt=media&token=xerxes`,
+                      //icon: `https://firebasestorage.googleapis.com/v0/b/connect-cbff7.appspot.com/o/${window.imageMap[tr.eventId]}.png?alt=media&token=xerxes`,
+                      icon: `/assets/images/${window.imageMap[tr.eventId]}.png`,
                       map: window.map,
                       position: {
-                        lat: tr.latitude, lng: tr.longitude,
+                        lat: +tr.latitude, lng: +tr.longitude,
                       },
                       title: tr.name,
                     });
@@ -114,15 +108,24 @@
                       let contentString = `<dl class="row bg-white text-dark adaptive"><h2 id="heading${tr.id}">${marker.title}</h2>`;
                       //delete tr.eventId;
                       for (const [key, value] of Object.entries(tr)) {
-                        if (key !== 'Id') {
-                          contentString += `<dt class="col-6">${key}</dt><dd class="col-6">`;
-                          if (key === 'Website') {
-                            contentString += `<a href="${value}">${value}</a>`;
-                          }
-                          else {
-                            contentString += value;
-                          }
-                          contentString += '</dd>';
+
+                        switch (key) {
+                          case 'id':
+                          case 'name':
+                          case 'latitude':
+                          case 'longitude':
+                          case 'eventId':
+                            break;
+                          default:
+                            contentString += `<dt class="col-6">${key}</dt><dd class="col-6">`;
+                            if (key === 'Website') {
+                              contentString += `<a href="${value}">${value}</a>`;
+                            }
+                            else {
+                              contentString += value;
+                            }
+                            contentString += '</dd>';
+                            break;
                         }
                       }
                       contentString += `</dl><a href="/detail?id=${tr.id}">Details</a>`;
@@ -149,31 +152,39 @@
     <!----------------------------------------PARENT----------------------------------------------------------------->
     <!----------------------------------------PARENT----------------------------------------------------------------->
 
-    
     <style>
-      .parent 
-      {
+      .parent {
         margin-right: px;
         float: left;
         width: 130px;
         height: 50px;
       }
     </style>
+    <div class="scroll" id="categories"></div>
 
-             <div class="scroll" id="categories">
-    </div>
     <!-----------------------------CHILD--1--LIST--------------------------------->
     <!-----------------------------CHILD--1--LIST--------------------------------->
     <!-----------------------------CHILD--1--LIST--------------------------------->
+
+
+
+
     <ul>
-        <div class="child" id="events">
-
-        </div>
+      <div class="child" id="events"> </div>
     </ul>
+
+    <!------------------------------SUMMIT-BUTTON------------------------------------->
+    <!------------------------------SUMMIT-BUTTON------------------------------------->
+    <!------------------------------SUMMIT-BUTTON------------------------------------->
+
+    <button class="summit" onclick="onSubmit()">summit !!!!</button><br><br>
+
     <!------------------------------JS----Button----exc.....------------------------------>
     <!------------------------------JS----Button----exc.....------------------------------>
     <!------------------------------JS----Button----exc.....------------------------------>
+
     <script>
+
       function onDelete(id) {
         const buildings = JSON.parse(localStorage.getItem('host') || '[]');
 
@@ -183,41 +194,6 @@
 
         location.href = '/';
       }
-    </script>
-    <!------------------------------SUMMIT-BUTTON------------------------------------->
-    <!------------------------------SUMMIT-BUTTON------------------------------------->
-    <!------------------------------SUMMIT-BUTTON------------------------------------->
-
-    <button class="summit" onclick="onSubmit()">summit !!!!</button>
-   
-    <button class="summits" onclick="onSubmit()">Delete !!!!</button>
-
-    <div>
-      <table style="color: white;">
-        <thead>
-          <td style="width: 300">
-            Name
-          </td>
-          <td style="width: 400">
-            Address
-          </td>
-          <td style="width: 400">
-            Phone Number
-          </td>
-          <td style="width: 500">
-            Hours of Operation
-          </td>
-          <td style="width: 400">
-            Website
-          </td>
-        </thead>
-        <tbody id="table">
-
-        </tbody>
-      </table>
-    </div>
-
-    <script>
 
       function onSubmit() {
         const inputs = document.querySelectorAll('input[type=checkbox]');
@@ -268,9 +244,36 @@
           })
       }
 
+      function onSubEventClick(id) {
+        var elements = document.getElementsByClassName("parentlist");
+        for (var i = 0; i < elements.length; i++) {
+          elements[i].classList.remove('bak');
+        }
+
+        fetch(`/api/d-categories/${id}`)
+          .then(info => info.json())
+          .then(data => {
+            document.getElementById('events').innerHTML = data
+              .map(item => {
+                return eventTemplate.replace('_TITLE_', item.title).replace('_ID_', item.id)
+              })
+          })
+      }
+
       window.onload = function () {
 
-        const categoryTemplate = '<div class="parentlist" id="_ID_"><button class="parent" onclick="onEventClick(\'_ID_\')">_TITLE_</div></button>';
+        const categoryTemplate = `
+          <div class="parentlist" id="_ID_">
+            <div>
+              <button class="parent" onclick="onEventClick(\'_ID_\')">
+                _TITLE_
+              </button>
+            </div>
+            <div class="dropdown-options">
+              _CHILDREN_
+            </div>
+          </div>
+          `
 
         fetch('/api/categories')
           .then((info) => info.json())
@@ -278,7 +281,12 @@
             console.log(data);
             document.getElementById('categories').innerHTML = data
               .map((item) => {
-                return categoryTemplate.replace(/_ID_/g, item.id).replace('_TITLE_', item.title)
+                return categoryTemplate
+                  .replace(/_ID_/g, item.id)
+                  .replace('_TITLE_', item.title)
+                  .replace('_CHILDREN_', item.children
+                    .map(_item => `<a href="#" onclick="onSubEventClick(${_item.id})">${_item.title}</a>`)
+                    .join(''))
               })
               .join('');
           })
@@ -298,93 +306,90 @@
 
 
 
-<!----------------------------------------------STYLE--------------------------------------------------------------->
-<!----------------------------------------------STYLE--------------------------------------------------------------->
-<!----------------------------------------------STYLE--------------------------------------------------------------->
-
-<style>
-  * 
-  {
-  padding: 0;
-  margin: 0;
-  box-sizing: corder-box;
-  }
-
-  body 
-  {
-  width: 100%;
-  margin: 0 auto;
-  }
-
-  .nav-container 
-  {
-  background-color: rgb(0, 0, 0);
-  border-bottom: 3px solid rgb(0, 34, 129);
-  display: flex;
-  justify-content: space-between;
-  }
-
-  .right-side, left-side 
-  {
-  list-style-type: none;
-  }
-
-  .right-side li,.leftside li 
-  {
-  display: inline-block;
-  }
-
-  .right-side li a,.left-side li a 
-  {
-  text-decoration: none;
-  display: block;
-  width: 100%;
-  font-size: 15px;
-  color: blue;
-  padding: 14px 16px;
-  font-weight: bold;
-  }
-
-  .left-side li a 
-  {
-  height: 100%;
-  width: -5%;
-  font-size: 10px;
-  }
 
 
-  .family 
-  {
-  background-color: rgb(0, 33, 150);
-  border-color: #000000;
-  border-width: 6px;
-  border-radius: 6px;
-  color: rgb(255, 255, 255);
-  width: 120px;
-  cursor: pointer;
-  font-size: 15px;
-  font: bold;
-  }
 
-  .h 
-  {
-  background-color: rgb(0, 33, 150);
-  border-color: #000000;
-  border-width: 6px;
-  border-radius: 6px;
-  color: rgb(255, 255, 255);
-  width: 25px;
-  cursor: pointer;
-  font-size: 15px;
-  font: bold;
-  }
 
-  .sumitts
-  {
-  margin: right;
+    <!----------------------------------------------STYLE--------------------------------------------------------------->
+    <!----------------------------------------------STYLE--------------------------------------------------------------->
+    <!----------------------------------------------STYLE--------------------------------------------------------------->
 
-  }
-</style>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: corder-box;
+      }
+
+      body {
+        width: 100%;
+        margin: 0 auto;
+      }
+
+      .nav-container {
+        background-color: rgb(0, 0, 0);
+        border-bottom: 3px solid rgb(0, 34, 129);
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .right-side,
+      left-side {
+        list-style-type: none;
+      }
+
+      .right-side li,
+      .leftside li {
+        display: inline-block;
+      }
+
+      .right-side li a,
+      .left-side li a {
+        text-decoration: none;
+        display: block;
+        width: 100%;
+        font-size: 15px;
+        color: blue;
+        padding: 14px 16px;
+        font-weight: bold;
+      }
+
+      .left-side li a {
+        height: 100%;
+        width: -5%;
+        font-size: 10px;
+      }
+
+
+      .family {
+        background-color: rgb(0, 33, 150);
+        border-color: #000000;
+        border-width: 6px;
+        border-radius: 6px;
+        color: rgb(255, 255, 255);
+        width: 120px;
+        cursor: pointer;
+        font-size: 15px;
+        font: bold;
+      }
+
+      .h {
+        background-color: rgb(0, 33, 150);
+        border-color: #000000;
+        border-width: 6px;
+        border-radius: 6px;
+        color: rgb(255, 255, 255);
+        width: 25px;
+        cursor: pointer;
+        font-size: 15px;
+        font: bold;
+      }
+
+      .sumitts {
+        margin: right;
+
+      }
+    </style>
 
   </body>
 
